@@ -16,8 +16,13 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="bg-top"></div>
     <header class="container justify_between">
       <a href="/">
         <img
@@ -65,7 +70,7 @@
           </div>
           <div></div>
         </div>
-        <a href="/category">Інше</a>
+        <a href="/catalog">Інше</a>
         <a href="/cart">
           <img
             src="./assets/images/header/cart.svg"
@@ -85,9 +90,280 @@
         <div></div>
       </div>
     </header>
-    <main></main>
+    <main>
+      <div class="lv1 container">
+        <div>
+          <h1>Пошив під замовлення штор та тюль</h1>
+          <p>
+            Наші майстри з шиття створять для вас неповторні штори, тюлі та
+            тасьми, які додають затишку і стилю вашому приміщенню.
+          </p>
+          <a href="/catalog"><button class="button-bg">Каталог</button></a>
+        </div>
+        <img
+          src="./assets/images/home/top.png"
+          alt="top-img"
+          width="519"
+          height="680"
+        />
+      </div>
+      <div class="lv2">
+        <div class="container">
+          <h2>Трохи про нас</h2>
+          <p>
+            Привіт! Ми - команда інтернет-магазину, яка спеціалізується на
+            шторах, тюлях, тасьмах та індивідуальному пошитті. Наша мета -
+            зробити ваш дім ще затишнішим та стильнішим, надаючи вам можливість
+            створити простір, який відображатиме ваші уподобання та особливості.
+          </p>
+          <p>
+            Ми розуміємо, що вибір текстилю для вашого домашнього інтер'єру - це
+            важливе завдання, тому пропонуємо вам широкий вибір матеріалів і
+            кольорів. Наші фахівці з радістю нададуть вам професійні поради щодо
+            вибору і дизайну, щоб кожен елемент вашого простору відображав ваш
+            стиль та персональність.
+          </p>
+          <p>
+            Приєднуйтесь до нашої спільноти, де ми не лише пропонуємо вам
+            високоякісні товари, а й ділимося корисними порадами та ідеями з
+            декорування вашого дому. Разом з нами ви зможете створити простір
+            вашої мрії, в якому кожен день буде наповнений комфортом та
+            гармонією. Долучайтеся та відкрийте для себе нові можливості дизайну
+            вашого дому разом з нашим інтернет-магазином!
+          </p>
+        </div>
+      </div>
+      <div class="lv3 container">
+        <h2>Фото клієнтів</h2>
+        <div id="imagesGallery"></div>
+        <div class="pagination">
+          <button class="arrow" onclick="prevSlide()">
+            <img
+              src="./assets/images/arrow-left.svg"
+              alt="arrow-left"
+              width="17"
+              height="20"
+            />
+          </button>
+          <div class="list"></div>
+          <button class="arrow" onclick="nextSlide()">
+            <img
+              src="./assets/images/arrow-right.svg"
+              alt="arrow-right"
+              width="17"
+              height="20"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="lv4">
+        <div class="container">
+          <h2>Відгуки</h2>
+          <div id="slide-b">
+            <div>
+              <div>
+                <h3>Софія Гулевская</h3>
+                <p>
+                  Вибрала тут чудові штори в кімнату.<br />Ціна приємно
+                  здивувала якість гарна.<br />Мені дуже сподобався цей
+                  магазин.<br />Рекомендую всім хто хоче придбати гарні штори за
+                  хорошою ціною.
+                </p>
+              </div>
+              <div>
+                <h3>Анастасия Юренко</h3>
+                <p>
+                  Купувала штори. Широкий вибір товару, допомогли вибрати
+                  потрібний варіант.<br />Гарне обслуговування і ціни.<br />Штори
+                  гарної якості, рекомендую.
+                </p>
+              </div>
+              <div>
+                <h3>Анна Севрюкова</h3>
+                <p>
+                  Обслуговування на найвищому рівні! Сучасний вибір якісних
+                  тканин. Штори вийшли шикарні!
+                </p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Софія Дмитрієвич</h3>
+                <p>
+                  Дуже вдячна Вам за вашу роботу! В мене проблемне еркерне вікно
+                  з різною висотою.<br />В багатьох магазинах казали що не
+                  реально зробити те що я хотіла. Але тут змогли не лише
+                  підібрати і ідеально встановити карнизи, а ще й підібрати і
+                  пошити тюль та штори за моїм бажанням. Вийшло просто чудово!
+                  Всім, хто й досі думає, що їхні задуми майже неможливо
+                  втілити, нехай переконається в зворотному, звернувшись до
+                  цього магазину!!
+                </p>
+              </div>
+              <div>
+                <h3>Світлана Окань</h3>
+                <p>
+                  Чудовий магазин! Прекрасний персонал та величезний асортимент.
+                  Допомогли з вибором, виготовили все в терміни, штори дуже
+                  красиві, довжина підібрана ідеально.<br />Без поспіху все
+                  показали, порадили,розповіли як правильно вішати. З Вами дуже
+                  приємно мати справу! Дякую за вашу роботу!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="justify_center">
+            <a href="/">Більше відгуків</a>
+          </div>
+        </div>
+      </div>
+      <div class="lv5 container">
+        <h2>Зв'язатися</h2>
+        <div class="info_contact">
+          <label for="">Адресса</label>
+          <p>Полтава, вулиця Івана Мазепи, 17</p>
+        </div>
+        <div class="info_contact">
+          <label for="">Години праці</label>
+          <p>Щоденно з 9:30 до 18:30</p>
+        </div>
+        <div class="info_contact">
+          <label for="">Телефон</label>
+          <p>+380 050 862 7508</p>
+        </div>
+        <div class="info_contact">
+          <label for="">Пошта</label>
+          <p>figma.ua@gmail.com</p>
+        </div>
+        <button class="button-tr">Зв'язатися</button>
+        <iframe
+          title="geolocation"
+          src="https://maps.google.com/maps?q=ул.+Ивана+Мазепы,+17,+Полтава,+Полтавская+область,+36000&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+          frameborder="0"
+          loading="lazy"
+          width="200%"
+          height="430"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </main>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
-    <script></script>
+    <script>
+      let countImage = 1;
+      let index = 1;
+      const screenWidth = window.innerWidth;
+
+      fetch("./server/slider/slider.php")
+        .then((response) => response.json())
+        .then((images) => {
+          countImage = images.length;
+          const imageGallery = document.getElementById("imagesGallery");
+          const listPag = document.getElementsByClassName("list");
+
+          images.forEach((image, i) => {
+            const imageName = image.split(".")[0];
+            const img = document.createElement("img");
+            img.src = `./assets/images/home/list/${image}`;
+            img.alt = imageName;
+            img.id = `img-${imageName}`;
+            if (i === 0) img.className = "active";
+            imageGallery.appendChild(img);
+
+            const div = document.createElement("div");
+            div.id = `p-${imageName}`;
+            if (i === 0) div.className = "active";
+            listPag[0].appendChild(div);
+          });
+        })
+        .catch((error) => console.error("Ошибка загрузки изображений:", error));
+
+      function changeSlide(direction) {
+        let activeImage = document.getElementById(`img-${index}`);
+        let activePage = document.getElementById(`p-${index}`);
+
+        activeImage.classList.remove("active");
+        activePage.classList.remove("active");
+
+        if (direction === "prev") {
+          index = index === 1 ? countImage : index - 1;
+        } else {
+          index = index === countImage ? 1 : index + 1;
+        }
+
+        activeImage = document.getElementById(`img-${index}`);
+        activePage = document.getElementById(`p-${index}`);
+
+        activeImage.classList.add("active");
+        activePage.classList.add("active");
+      }
+
+      function prevSlide() {
+        changeSlide("prev");
+      }
+
+      function nextSlide() {
+        changeSlide("next");
+      }
+    </script>
+
+    <script>
+      if (window.innerWidth <= 760) {
+        let slideB = document.getElementById("slide-b");
+        let isTouchSlideB = false;
+        let startSlideX = 0;
+        let startTranslateX = 0;
+        let sliderWidth = slideB.scrollWidth;
+        let sliderOffset = slideB.offsetWidth;
+
+        function changeTouchedB(isTouch) {
+          isTouchSlideB = isTouch;
+          if (!isTouch) {
+            startSlideX = 0;
+            startTranslateX =
+              parseInt(
+                slideB.style.transform
+                  .replace("translateX(", "")
+                  .replace("px)", "")
+              ) || 0;
+          }
+        }
+
+        function slideMoveB(e) {
+          if (isTouchSlideB) {
+            const currentX = e.clientX || e.touches[0].clientX;
+            if (startSlideX !== 0) {
+              const diff = currentX - startSlideX;
+              let newTranslateX = startTranslateX + diff;
+              if (newTranslateX >= 0) newTranslateX = 0;
+              else if (newTranslateX <= -(sliderWidth - sliderOffset))
+                newTranslateX = -(sliderWidth - sliderOffset);
+              slideB.style.transform = `translateX(${newTranslateX}px)`;
+            }
+          }
+        }
+
+        slideB.addEventListener("mousedown", (e) => {
+          changeTouchedB(true);
+          startSlideX = e.clientX;
+          slideB.style.cursor = "grabbing";
+        });
+        slideB.addEventListener("mousemove", slideMoveB);
+        slideB.addEventListener("mouseup", () => {
+          changeTouchedB(false);
+          slideB.style.removeProperty("cursor");
+        });
+        slideB.addEventListener("touchstart", (e) => {
+          changeTouchedB(true);
+          startSlideX = e.clientX;
+          slideB.style.cursor = "grabbing";
+        });
+        slideB.addEventListener("touchmove", slideMoveB);
+        slideB.addEventListener("touchend", () => {
+          changeTouchedB(false);
+          slideB.style.removeProperty("cursor");
+        });
+      }
+    </script>
   </body>
 </html>
