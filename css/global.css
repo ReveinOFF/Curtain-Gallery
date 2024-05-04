@@ -70,9 +70,17 @@ header {
   color: #606060;
 }
 
-.h_select > div {
+.h_select > div:first-of-type {
   gap: 4px;
   cursor: pointer;
+}
+
+.h_select > div:first-of-type > img {
+  transition: 0.3s;
+}
+
+.h_select > div:first-of-type > img:is(.active) {
+  transform: rotate(90deg);
 }
 
 footer {
@@ -89,6 +97,7 @@ footer {
 
 .h_burger {
   display: none;
+  position: relative;
 }
 
 .h_burger > img {
@@ -218,6 +227,134 @@ textarea {
 
 .req-br:hover {
   background: #ff8720;
+}
+
+.mob_burg {
+  background: #565046;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  right: -70px;
+  opacity: 0;
+  visibility: hidden;
+  padding: 28px 20px;
+  width: 192px;
+  transition: all 0.3s;
+}
+
+.mob_burg:is(.active) {
+  opacity: 1;
+  visibility: visible;
+  right: 0;
+}
+
+.mob_burg > img {
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  filter: invert(100%) sepia(0%) saturate(5662%) hue-rotate(286deg)
+    brightness(128%) contrast(110%);
+}
+
+.mob_burg > img:hover {
+  filter: invert(87%) sepia(0%) saturate(0%) hue-rotate(68deg) brightness(104%)
+    contrast(97%);
+}
+
+.mob_burg > div {
+  display: grid;
+  gap: 14px;
+}
+
+.mob_burg > div > a {
+  font-family: Open Sans;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24.51px;
+  color: #e2e2e2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mob_burg > div > a::before {
+  content: "";
+  background-image: url(../assets/images/home/line.svg);
+  width: 0px;
+  height: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.1s;
+}
+
+.mob_burg > div > a:hover::before {
+  width: 21px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mob_burg > div > a:hover {
+  color: #ffffff;
+}
+
+.h_select {
+  position: relative;
+}
+
+.burger_th {
+  background: #565046;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 9;
+  top: -20px;
+  right: 50%;
+  transform: translateX(50%);
+  opacity: 0;
+  display: grid;
+  gap: 14px;
+  visibility: hidden;
+  padding: 28px 20px;
+  width: 192px;
+  transition: all 0.3s;
+}
+
+.burger_th:is(.active) {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.burger_th > a {
+  font-family: Open Sans;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24.51px;
+  color: #e2e2e2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.burger_th > a::before {
+  content: "";
+  background-image: url(../assets/images/home/line.svg);
+  width: 0px;
+  height: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.1s;
+}
+
+.burger_th > a:hover::before {
+  width: 21px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.burger_th > a:hover {
+  color: #ffffff;
 }
 
 @media screen and (max-width: 1440px) {

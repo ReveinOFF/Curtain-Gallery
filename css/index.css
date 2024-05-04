@@ -274,6 +274,11 @@
   cursor: pointer;
 }
 
+#contact-modal > div > img:hover {
+  filter: invert(10%) sepia(12%) saturate(8%) hue-rotate(346deg)
+    brightness(101%) contrast(92%);
+}
+
 #contact-modal > div > h2 {
   font-family: Montserrat;
   font-size: 44px;

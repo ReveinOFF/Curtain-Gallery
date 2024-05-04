@@ -26,3 +26,9 @@ CREATE TABLE IF NOT EXISTS products (
     subcatalog_id INT NOT NULL,
     FOREIGN KEY (subcatalog_id) REFERENCES subcatalog(id)
 );
+
+INSERT INTO catalog (name) VALUES ('Штори');
+INSERT INTO catalog (name) VALUES ('Тюль');
+INSERT INTO catalog (name) VALUES ('Тасьма');
+INSERT INTO catalog (name) VALUES ('Кріплення магніт');
+INSERT INTO catalog (name) VALUES ('Кріплення гачки');
