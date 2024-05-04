@@ -12,6 +12,10 @@ body {
   box-sizing: border-box;
 }
 
+*:disabled {
+  cursor: not-allowed;
+}
+
 a {
   text-decoration: none;
 }
@@ -132,8 +136,9 @@ footer {
   background-color: transparent;
 }
 
-.button-tr:hover {
+.button-tr:not(:disabled):hover {
   background: #ff8720;
+  color: #ffffff;
 }
 
 .button-tr:active {
@@ -143,74 +148,75 @@ footer {
 .button-tr:disabled {
   background: #948374;
   border-color: transparent;
+  color: #ffffff;
 }
 
 .button-tr:not(:active):focus {
   border: 4px solid #ff8720;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 83px;
-}
-
-.pagination .arrow {
-  border: 1px solid #ff8720;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 26px;
+fieldset {
+  border: 0;
   background-color: transparent;
+  display: grid;
+  margin: 0;
+  padding: 0;
 }
 
-.pagination .arrow:hover {
-  background: #ff8720;
+textarea {
+  resize: none;
 }
 
-.pagination .arrow:hover img {
-  filter: invert(99%) sepia(0%) saturate(5796%) hue-rotate(39deg)
-    brightness(115%) contrast(100%);
+input,
+textarea {
+  outline: none;
 }
 
-.pagination .arrow:active {
-  background: #ff953b;
+.input-ds {
+  border: 1px solid #606060;
+  background-color: transparent;
+  padding: 12px 10px;
+  color: #222222;
+  border-radius: 5px;
 }
 
-.pagination .arrow:active img {
-  filter: invert(99%) sepia(0%) saturate(5796%) hue-rotate(39deg)
-    brightness(115%) contrast(100%);
+.input-ds:focus {
+  border-color: #222222;
 }
 
-.pagination .arrow:disabled {
-  background: #948374;
+.input-ds:is(.error) {
+  color: #f84343;
+  border-color: #f84343;
 }
 
-.pagination .arrow:disabled img {
-  filter: invert(99%) sepia(0%) saturate(5796%) hue-rotate(39deg)
-    brightness(115%) contrast(100%);
+.input-ds:disabled {
+  border-color: #cdcdcd;
+  color: #cdcdcd;
 }
 
-.pagination .arrow:not(:active):focus {
-  border: 3px solid #ff8720;
+.input-ds::placeholder {
+  color: #606060;
 }
 
-.pagination .list {
+.req::after {
+  content: "*";
+  margin-left: 7px;
+  color: #606060;
+}
+
+.req-br {
+  background: #ffb06b;
+  padding: 12px 18px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
 }
 
-.pagination .list div {
-  border: 1px solid #ff8720;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.pagination .list div:is(.active) {
+.req-br:hover {
   background: #ff8720;
 }
 
@@ -263,5 +269,10 @@ footer {
 @media screen and (max-width: 480px) {
   .container {
     margin-inline: 36px;
+  }
+
+  header > a > img {
+    width: 177px;
+    height: 33px;
   }
 }

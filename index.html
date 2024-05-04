@@ -91,6 +91,66 @@
       </div>
     </header>
     <main>
+      <div id="contact-modal">
+        <div id="contact-modal-child">
+          <img
+            src="./assets/images/home/close.svg"
+            alt="close"
+            width="21"
+            height="21"
+            onclick="contactClose()"
+          />
+          <h2>Зв'язатися</h2>
+          <form onsubmit="contactSubmit(event)">
+            <fieldset>
+              <label for="name" class="req">Ім’я</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Валентин(a)"
+                class="input-ds"
+                id="name-check"
+                oninput="onChangeName(event)"
+                onblur="onBlurName(event)"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="phone">Телефон</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+380 xx xxx xx xx"
+                class="input-ds"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="email" class="req">Пошта</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="example@gmail.com"
+                class="input-ds"
+                id="email-check"
+                oninput="onChangeEmail(event)"
+                onblur="onBlurEmail(event)"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="message" class="req">Повідомлення</label>
+              <textarea
+                name="message"
+                class="input-ds"
+                id="mess-check"
+                oninput="onChangeMess(event)"
+                onblur="onBlurMess(event)"
+              ></textarea>
+            </fieldset>
+            <button type="submit" class="button-tr" id="contact-btn-d">
+              Відправити
+            </button>
+          </form>
+        </div>
+      </div>
       <div class="lv1 container">
         <div>
           <h1>Пошив під замовлення штор та тюль</h1>
@@ -137,7 +197,7 @@
         <h2>Фото клієнтів</h2>
         <div id="imagesGallery"></div>
         <div class="pagination">
-          <button class="arrow" onclick="prevSlide()">
+          <button class="arrow" onclick="prevSlide()" id="arrow-left">
             <img
               src="./assets/images/arrow-left.svg"
               alt="arrow-left"
@@ -146,7 +206,7 @@
             />
           </button>
           <div class="list"></div>
-          <button class="arrow" onclick="nextSlide()">
+          <button class="arrow" onclick="nextSlide()" id="arrow-right">
             <img
               src="./assets/images/arrow-right.svg"
               alt="arrow-right"
@@ -213,7 +273,11 @@
             </div>
           </div>
           <div class="justify_center">
-            <a href="/">Більше відгуків</a>
+            <a
+              target="_blank"
+              href="https://www.google.com/maps/place/%D0%93%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F+%D0%A8%D1%82%D0%BE%D1%80/@49.5654233,34.5100339,15z/data=!4m18!1m9!3m8!1s0x40d82f2bfeed0a73:0xc08dbc25d777df10!2z0JPQsNC70LXRgNC10Y8g0KjRgtC-0YA!8m2!3d49.5654233!4d34.5100339!9m1!1b1!16s%2Fg%2F11h80226zl!3m7!1s0x40d82f2bfeed0a73:0xc08dbc25d777df10!8m2!3d49.5654233!4d34.5100339!9m1!1b1!16s%2Fg%2F11h80226zl?entry=ttu"
+              >Більше відгуків</a
+            >
           </div>
         </div>
       </div>
@@ -235,7 +299,7 @@
           <label for="">Пошта</label>
           <p>figma.ua@gmail.com</p>
         </div>
-        <button class="button-tr">Зв'язатися</button>
+        <button class="button-tr" onclick="contactGet()">Зв'язатися</button>
         <iframe
           title="geolocation"
           src="https://maps.google.com/maps?q=ул.+Ивана+Мазепы,+17,+Полтава,+Полтавская+область,+36000&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
@@ -247,55 +311,216 @@
         ></iframe>
       </div>
     </main>
+    <div class="req-br">
+      <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
+    </div>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script>
+      let validName = false;
+      let validEmail = false;
+      let validMess = false;
+
+      function eventBlockClose(e) {
+        if (!e.target.closest("#contact-modal-child")) contactClose();
+      }
+
+      function contactGet() {
+        document.getElementById("contact-modal").classList.add("active");
+
+        setTimeout(
+          () => document.addEventListener("click", eventBlockClose),
+          500
+        );
+      }
+
+      function contactClose() {
+        document.getElementById("contact-modal").classList.remove("active");
+
+        document.removeEventListener("click", eventBlockClose);
+      }
+
+      function onChangeName(event) {
+        if (event.target.value === "") {
+          document.getElementById("name-check").classList.add("error");
+          validName = false;
+        } else {
+          document.getElementById("name-check").classList.remove("error");
+          validName = true;
+        }
+      }
+      function onBlurName(event) {
+        if (event.target.value === "")
+          document.getElementById("name-check").classList.add("error");
+      }
+
+      function onChangeEmail(event) {
+        const emailPattern =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (
+          event.target.value === "" ||
+          !emailPattern.test(event.target.value)
+        ) {
+          document.getElementById("email-check").classList.add("error");
+          validEmail = false;
+        } else {
+          document.getElementById("email-check").classList.remove("error");
+          validEmail = true;
+        }
+      }
+      function onBlurEmail(event) {
+        if (event.target.value === "")
+          document.getElementById("email-check").classList.add("error");
+      }
+
+      function onChangeMess(event) {
+        if (event.target.value === "") {
+          document.getElementById("mess-check").classList.add("error");
+          validMess = false;
+        } else {
+          document.getElementById("mess-check").classList.remove("error");
+          validMess = true;
+        }
+      }
+      function onBlurMess(event) {
+        if (event.target.value === "")
+          document.getElementById("mess-check").classList.add("error");
+      }
+
+      function contactSubmit(event) {
+        event.preventDefault();
+
+        if (!validName) {
+          document.getElementById("name-check").classList.add("error");
+        }
+
+        if (!validEmail) {
+          document.getElementById("email-check").classList.add("error");
+        }
+
+        if (!validMess) {
+          document.getElementById("mess-check").classList.add("error");
+        }
+
+        if (validEmail && validMess && validName) {
+          document.getElementById("contact-btn-d").disabled = true;
+
+          const formData = new FormData(event.target);
+
+          fetch("./server/mail/contact_send.php", {
+            method: "POST",
+            body: formData,
+          }).then((response) => {
+            document.getElementById("contact-btn-d").disabled = false;
+            if (response.ok) {
+              contactClose();
+            }
+          });
+        }
+      }
+    </script>
 
     <script>
       let countImage = 1;
       let index = 1;
       const screenWidth = window.innerWidth;
+      let listImage = [];
 
-      fetch("./server/slider/slider.php")
+      function calculateImagesToShow() {
+        if (screenWidth > 1000) {
+          return 6;
+        } else if (screenWidth > 760) {
+          return 4;
+        } else {
+          return 1;
+        }
+      }
+
+      fetch("./server/slider/slider.php", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((images) => {
+          listImage = images;
           countImage = images.length;
           const imageGallery = document.getElementById("imagesGallery");
           const listPag = document.getElementsByClassName("list");
 
-          images.forEach((image, i) => {
-            const imageName = image.split(".")[0];
-            const img = document.createElement("img");
-            img.src = `./assets/images/home/list/${image}`;
-            img.alt = imageName;
-            img.id = `img-${imageName}`;
-            if (i === 0) img.className = "active";
-            imageGallery.appendChild(img);
+          const count = calculateImagesToShow();
+          let pageCount = Math.floor(countImage / count);
 
+          if (pageCount <= 1) {
+            document.getElementById("arrow-left").disabled = true;
+            document.getElementById("arrow-right").disabled = true;
+          }
+
+          if (count === 1 && pageCount > 7) pageCount = 7;
+
+          for (let i = 1; i <= pageCount; i++) {
             const div = document.createElement("div");
-            div.id = `p-${imageName}`;
-            if (i === 0) div.className = "active";
+            div.id = `page-${i}`;
+            if (i === 1) div.className = "active";
             listPag[0].appendChild(div);
+          }
+
+          images.forEach((image, i) => {
+            if (i < count) {
+              const imageName = image.split(".")[0];
+              const img = document.createElement("img");
+              img.src = `./assets/images/home/list/${image}`;
+              img.alt = imageName;
+              img.id = `img-${imageName}`;
+              imageGallery.appendChild(img);
+            }
           });
         })
         .catch((error) => console.error("Ошибка загрузки изображений:", error));
 
       function changeSlide(direction) {
-        let activeImage = document.getElementById(`img-${index}`);
-        let activePage = document.getElementById(`p-${index}`);
+        const imageGallery = document.getElementById("imagesGallery");
+        const count = calculateImagesToShow();
+        const pageCount = Math.ceil(countImage / count);
 
-        activeImage.classList.remove("active");
-        activePage.classList.remove("active");
+        let newIndex;
 
         if (direction === "prev") {
-          index = index === 1 ? countImage : index - 1;
-        } else {
-          index = index === countImage ? 1 : index + 1;
+          newIndex = index - count;
+          if (newIndex < 1) {
+            newIndex += countImage;
+          }
+        } else if (direction === "next") {
+          newIndex = index + count;
+          if (newIndex > countImage) {
+            newIndex -= countImage;
+          }
         }
 
-        activeImage = document.getElementById(`img-${index}`);
-        activePage = document.getElementById(`p-${index}`);
+        index = newIndex;
 
-        activeImage.classList.add("active");
-        activePage.classList.add("active");
+        const paginationBlocks = document.querySelectorAll(".list > div");
+        paginationBlocks.forEach((block) => block.classList.remove("active"));
+
+        const currentPage = Math.ceil(index / count);
+        const activePage = document.getElementById(`page-${currentPage}`);
+        if (activePage) {
+          activePage.classList.add("active");
+        }
+
+        imageGallery.innerHTML = "";
+
+        for (let i = index; i < index + count; i++) {
+          const imgIndex = i > countImage ? i - countImage : i;
+          const imageName = listImage[imgIndex - 1].split(".")[0];
+          const img = document.createElement("img");
+          img.src = `./assets/images/home/list/${listImage[imgIndex - 1]}`;
+          img.alt = imageName;
+          img.id = `img-${imageName}`;
+          imageGallery.appendChild(img);
+        }
       }
 
       function prevSlide() {
