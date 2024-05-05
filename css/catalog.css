@@ -1,0 +1,50 @@
+.catalog > h2 {
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 43.88px;
+  color: #222222;
+}
+
+.catalog_block {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 32px;
+  row-gap: 64px;
+}
+
+.catalog_block * {
+  width: 100%;
+  height: 100%;
+}
+
+.catalog_block > a > p {
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.38px;
+  color: #222222;
+}
+
+.catalog_block > a > img {
+  object-fit: cover;
+  border-radius: 5px;
+  height: 230px;
+}
+
+@media screen and (max-width: 1000px) {
+  .catalog_block {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 36px;
+    row-gap: 36px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .catalog_block {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 36px;
+  }
+}

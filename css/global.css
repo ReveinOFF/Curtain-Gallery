@@ -6,6 +6,7 @@ body {
 
 body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -355,6 +356,34 @@ textarea {
 
 .burger_th > a:hover {
   color: #ffffff;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  margin-top: 96px;
+}
+
+.pages > div,
+.pages > a {
+  color: #606060;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.79px;
+  margin-right: 2px;
+}
+
+.pages > img {
+  margin-right: 3px;
+}
+
+.pages > div:hover {
+  cursor: default;
+}
+
+.pages > a:hover {
+  color: #737373;
 }
 
 @media screen and (max-width: 1440px) {

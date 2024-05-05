@@ -134,11 +134,225 @@
         </div>
       </div>
     </header>
-    <main></main>
-    <div class="req-br">
-      <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
+    <div id="cart_modal">
+      <div class="cart_block">
+        <img
+          src="./assets/images/home/close.svg"
+          alt="close"
+          width="21"
+          height="21"
+          onclick="closeModal()"
+        />
+        <div>
+          <h2>Додано в кошик</h2>
+          <img
+            src="./assets/images/catalog/c1.png"
+            alt="c1"
+            width="398"
+            height="194"
+          />
+          <div class="cart_info">
+            <span>Тканина для штор:</span> Блекаут Твін двосторонній
+          </div>
+          <div class="cart_info"><span>Колір:</span> Чорний</div>
+          <div class="cart_info-m">
+            <div>
+              <input type="text" class="input-ds" value="1" />
+              <div>пог.м</div>
+            </div>
+            <div>5500.00 грн</div>
+          </div>
+        </div>
+        <button class="button-bg">До кошика</button>
+      </div>
     </div>
+    <main>
+      <div class="pages container">
+        <a href="/catalog">Каталог</a>
+        <img
+          src="./assets/images/header/arrow.svg"
+          alt="arrow"
+          width="12"
+          height="12"
+        />
+        <a href="/subcatalog">Штори</a>
+        <img
+          src="./assets/images/header/arrow.svg"
+          alt="arrow"
+          width="12"
+          height="12"
+        />
+        <a href="/subcatalog">Штори</a>
+        <img
+          src="./assets/images/header/arrow.svg"
+          alt="arrow"
+          width="12"
+          height="12"
+        />
+        <div style="color: #212121">Блекаут Твін двосторонній</div>
+      </div>
+      <div class="container product">
+        <div class="product-top">
+          <div class="product-tl">
+            <img src="./assets/images/catalog/c1.png" alt="c1" />
+            <div>
+              <img src="./assets/images/catalog/c1.png" alt="c1" />
+              <img src="./assets/images/catalog/c1.png" alt="c1" />
+              <img src="./assets/images/catalog/c1.png" alt="c1" />
+            </div>
+            <div>
+              Зверніть увагу! Колірна гамма виробу залежить від налаштувань
+              вашого монітора і може відрізнятися від реального.
+            </div>
+          </div>
+          <div class="product-tr">
+            <h1>Блекаут Твін двосторонній</h1>
+            <p>1550.00 грн / пог.м</p>
+            <div>
+              <input type="text" value="1" class="input-ds" />
+              <span>пог.м</span>
+            </div>
+            <div>
+              <div>Кольор:</div>
+              <div>
+                <div class="selected">
+                  <img
+                    src="./assets/images/colors/black.png"
+                    alt="black"
+                    width="32"
+                    height="32"
+                  />
+                </div>
+                <div>
+                  <img
+                    src="./assets/images/colors/black.png"
+                    alt="black"
+                    width="32"
+                    height="32"
+                  />
+                </div>
+                <div>
+                  <img
+                    src="./assets/images/colors/black.png"
+                    alt="black"
+                    width="32"
+                    height="32"
+                  />
+                </div>
+              </div>
+            </div>
+            <button class="button-bg" onclick="showModal()">
+              Додати в кошик
+            </button>
+          </div>
+        </div>
+        <div class="product-bot">
+          <div class="product-bf" id="first">
+            <h2 onclick="showInfo('first')">Характеристики</h2>
+            <div>
+              <div class="table-block">
+                <div>Склад</div>
+                <div>Поліестер</div>
+              </div>
+              <div class="table-block">
+                <div>Малюнок</div>
+                <div>Однотоний</div>
+              </div>
+              <div class="table-block">
+                <div>Виробник</div>
+                <div>Туреччина</div>
+              </div>
+              <div class="table-block">
+                <div>Щільність тканини</div>
+                <div>Товста</div>
+              </div>
+              <div class="table-block">
+                <div>Захист від сонця</div>
+                <div>8/10</div>
+              </div>
+              <div class="table-block">
+                <div>Догляд</div>
+                <div>Прання за температури 30</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-bs" id="second">
+            <h2 onclick="showInfo('second')">Інформація про замовлення</h2>
+            <div>
+              Після замовлення з вами зв'яжуться працівники магазину, щоб
+              уточнити деталі, такі як час виготовлення, вибір кріплення та
+              тасьми. Ви можете <a href="/">переглянути їх тут</a>.
+            </div>
+          </div>
+          <div class="product-bl" id="last">
+            <h2 onclick="showInfo('last')">Доставка і оплата</h2>
+            <div>
+              <div>
+                <h3>Спосіб отримання товару:</h3>
+                <div>
+                  Самовівіз — із магазин у м. Полтава, там ви можете особисто
+                  забрати готовий товар.
+                </div>
+              </div>
+              <div>
+                <h3>Способи оплати товару:</h3>
+                <ul>
+                  <li>
+                    100% передплата — оплата за перерахування на рахунок ФОП*.
+                  </li>
+                  <li>
+                    50% / 30% передплата — оплата половини вартості за
+                    перерахуванням на рахунок ФОП*.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                Установа банку - ПриватБанк<br />
+                МФО банку - ********<br />
+                Отримувач платежу - ФОП ****** ****** ********<br />
+                IBAN - UA ***********************<br />
+                Валюта рахунку - UAH<br />
+                РНОКПП отримувача - ********<br />
+                Призначення платежу - ЗА ТОВАР
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <a href="/#contact" class="req-br">
+      <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
+    </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script>
+      function showInfo(id) {
+        let info = document.getElementById(id);
+
+        if (info.classList.contains("active")) info.classList.remove("active");
+        else info.classList.add("active");
+      }
+
+      function eventCloseCare(e) {
+        if (!e.target.closest(".cart_block")) closeModal();
+      }
+      function closeModal() {
+        document.getElementById("cart_modal").classList.remove("active");
+        allScroll();
+
+        document.removeEventListener("click", eventCloseCare);
+      }
+
+      function showModal() {
+        document.getElementById("cart_modal").classList.add("active");
+        disScroll();
+
+        setTimeout(
+          () => document.addEventListener("click", eventCloseCare),
+          500
+        );
+      }
+    </script>
 
     <script src="./js/global.js"></script>
   </body>
