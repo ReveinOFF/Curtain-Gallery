@@ -23,7 +23,7 @@
   </head>
   <body>
     <div class="bg-top"></div>
-    <header class="container justify_between">
+    <header class="container-s justify_between">
       <a href="/">
         <img
           src="./assets/images/logo.svg"
@@ -135,7 +135,7 @@
       </div>
     </header>
     <main>
-      <div class="pages container">
+      <div class="pages container-s">
         <a href="/cart">Кошик</a>
         <img
           src="./assets/images/header/arrow.svg"
@@ -145,8 +145,172 @@
         />
         <div style="color: #222222">Оформлення замовлення</div>
       </div>
-      <div class="order container">
+      <div class="order container-s">
         <h1>Оформити замовлення</h1>
+        <div class="order-block">
+          <div>
+            <div class="order-usr">
+              <h2>Інформація про вас</h2>
+              <input
+                type="text"
+                name="name"
+                placeholder="Повне ім’я"
+                class="input-ds"
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+380 xx xxx xx xx"
+                class="input-ds"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="figma@gmail.com"
+                class="input-ds"
+              />
+            </div>
+            <div class="pay-sel">
+              <h2>Вибір предплати</h2>
+              <div>
+                <div class="checkbox checked">
+                  <input type="checkbox" checked />
+                  <svg
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.94918 11.275L16.1586 1.06563C16.3324 0.896875 16.5353 0.8125 16.7671 0.8125C16.9989 0.8125 17.1992 0.897371 17.3679 1.06712C17.5367 1.23684 17.6211 1.4384 17.6211 1.6718C17.6211 1.90518 17.5367 2.10625 17.3679 2.275L6.5398 13.1031C6.37105 13.2719 6.17418 13.3563 5.94918 13.3563C5.72418 13.3563 5.5273 13.2719 5.35855 13.1031L0.239803 7.98438C0.0710526 7.81437 -0.00863487 7.6125 0.000740132 7.37876C0.0101151 7.145 0.0996743 6.94375 0.269418 6.775C0.439143 6.60625 0.640706 6.52188 0.874106 6.52188C1.10749 6.52188 1.30855 6.60625 1.4773 6.775L5.94918 11.275Z"
+                      fill="#FF8720"
+                    />
+                  </svg>
+                </div>
+                <div>100% передплата</div>
+              </div>
+              <div>
+                <div class="checkbox">
+                  <input type="checkbox" />
+                  <svg
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.94918 11.275L16.1586 1.06563C16.3324 0.896875 16.5353 0.8125 16.7671 0.8125C16.9989 0.8125 17.1992 0.897371 17.3679 1.06712C17.5367 1.23684 17.6211 1.4384 17.6211 1.6718C17.6211 1.90518 17.5367 2.10625 17.3679 2.275L6.5398 13.1031C6.37105 13.2719 6.17418 13.3563 5.94918 13.3563C5.72418 13.3563 5.5273 13.2719 5.35855 13.1031L0.239803 7.98438C0.0710526 7.81437 -0.00863487 7.6125 0.000740132 7.37876C0.0101151 7.145 0.0996743 6.94375 0.269418 6.775C0.439143 6.60625 0.640706 6.52188 0.874106 6.52188C1.10749 6.52188 1.30855 6.60625 1.4773 6.775L5.94918 11.275Z"
+                      fill="#FF8720"
+                    />
+                  </svg>
+                </div>
+                <div>50% передплата</div>
+              </div>
+              <div>
+                <div class="checkbox">
+                  <input type="checkbox" />
+                  <svg
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.94918 11.275L16.1586 1.06563C16.3324 0.896875 16.5353 0.8125 16.7671 0.8125C16.9989 0.8125 17.1992 0.897371 17.3679 1.06712C17.5367 1.23684 17.6211 1.4384 17.6211 1.6718C17.6211 1.90518 17.5367 2.10625 17.3679 2.275L6.5398 13.1031C6.37105 13.2719 6.17418 13.3563 5.94918 13.3563C5.72418 13.3563 5.5273 13.2719 5.35855 13.1031L0.239803 7.98438C0.0710526 7.81437 -0.00863487 7.6125 0.000740132 7.37876C0.0101151 7.145 0.0996743 6.94375 0.269418 6.775C0.439143 6.60625 0.640706 6.52188 0.874106 6.52188C1.10749 6.52188 1.30855 6.60625 1.4773 6.775L5.94918 11.275Z"
+                      fill="#FF8720"
+                    />
+                  </svg>
+                </div>
+                <div>30% передплата</div>
+              </div>
+            </div>
+            <div class="exp">
+              <h2>Доставка</h2>
+              <div>
+                <div class="checkbox checked disabled">
+                  <input type="checkbox" checked />
+                  <svg
+                    width="18"
+                    height="14"
+                    viewBox="0 0 18 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.94918 11.275L16.1586 1.06563C16.3324 0.896875 16.5353 0.8125 16.7671 0.8125C16.9989 0.8125 17.1992 0.897371 17.3679 1.06712C17.5367 1.23684 17.6211 1.4384 17.6211 1.6718C17.6211 1.90518 17.5367 2.10625 17.3679 2.275L6.5398 13.1031C6.37105 13.2719 6.17418 13.3563 5.94918 13.3563C5.72418 13.3563 5.5273 13.2719 5.35855 13.1031L0.239803 7.98438C0.0710526 7.81437 -0.00863487 7.6125 0.000740132 7.37876C0.0101151 7.145 0.0996743 6.94375 0.269418 6.775C0.439143 6.60625 0.640706 6.52188 0.874106 6.52188C1.10749 6.52188 1.30855 6.60625 1.4773 6.775L5.94918 11.275Z"
+                      fill="#FF8720"
+                    />
+                  </svg>
+                </div>
+                <div>Самовивіз із магизину</div>
+              </div>
+              <div>
+                <div>Полтава, вулиця Івана Мазепи, 17</div>
+                <div>Щоденно з 9:30 до 18:30</div>
+              </div>
+              <iframe
+                title="geolocation"
+                src="https://maps.google.com/maps?q=ул.+Ивана+Мазепы,+17,+Полтава,+Полтавская+область,+36000&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                frameborder="0"
+                loading="lazy"
+                width="100%"
+                height="268"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div>
+            <div class="cart">
+              <h2>Ваш кошик</h2>
+              <div>
+                <img src="./assets/images/catalog/c1.png" alt="c1" />
+                <div class="cart-inf">
+                  <div>
+                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
+                  </div>
+                  <div><span>Колір:</span> Чорний</div>
+                </div>
+              </div>
+              <div>
+                <img src="./assets/images/catalog/c1.png" alt="c1" />
+                <div class="cart-inf">
+                  <div>
+                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
+                  </div>
+                  <div><span>Колір:</span> Чорний</div>
+                </div>
+              </div>
+              <div>
+                <img src="./assets/images/catalog/c1.png" alt="c1" />
+                <div class="cart-inf">
+                  <div>
+                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
+                  </div>
+                  <div><span>Колір:</span> Чорний</div>
+                </div>
+              </div>
+            </div>
+            <div class="order-sum">
+              <h2>Підсумок замовлення</h2>
+              <div>
+                <div>За все:</div>
+                <div>5500.00 грн</div>
+              </div>
+              <div>
+                <div>50% передплата</div>
+                <div>2750.00 грн</div>
+              </div>
+              <div>
+                <div>Вього:</div>
+                <div>2750.00 грн</div>
+              </div>
+              <button class="button-bg">Оплатити</button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <a href="/#contact" class="req-br">

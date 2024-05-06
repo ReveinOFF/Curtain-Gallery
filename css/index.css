@@ -389,6 +389,7 @@
 
   .lv5 iframe {
     width: 100%;
+    border-radius: 10px;
   }
 
   .lv3 > div:first-of-type {
