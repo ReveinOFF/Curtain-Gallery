@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS products (
     protection VARCHAR(40),
     care VARCHAR(40),
     colors TEXT,
+    is_exist BOOLEAN,
     subcatalog_id INT NOT NULL,
     FOREIGN KEY (subcatalog_id) REFERENCES subcatalog(id)
 );
@@ -99,11 +100,11 @@ SET @subcatalog_id = (
     SELECT id FROM subcatalog WHERE name = 'Блекаут'
 );
 
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p1.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p2.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Льон на блекауті Ельбрус', 'p3.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Сахара ШТ-030', 'p4.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p5.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p6.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p7.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
-INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p8.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p1.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p2.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Льон на блекауті Ельбрус', 'p3.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Сахара ШТ-030', 'p4.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p5.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p6.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p7.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
+INSERT INTO products (name, image, price, composition, figure, manufacturer, density, protection, care, colors, is_exist, subcatalog_id) VALUES ('Блекаут Твін двосторонній', 'p8.jpg', 1550, "Поліестер", "Однотоний", "Туреччина", "Товста", "8/10", "Прання за температури 30", "Чорний/Червоний", 1, @subcatalog_id);
