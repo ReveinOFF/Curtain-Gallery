@@ -175,30 +175,15 @@
           width="12"
           height="12"
         />
-        <a href="/subcatalog">Штори</a>
-        <img
-          src="./assets/images/header/arrow.svg"
-          alt="arrow"
-          width="12"
-          height="12"
-        />
-        <a href="/subcatalog">Штори</a>
-        <img
-          src="./assets/images/header/arrow.svg"
-          alt="arrow"
-          width="12"
-          height="12"
-        />
-        <div style="color: #212121">Блекаут Твін двосторонній</div>
       </div>
       <div class="container-s product">
         <div class="product-top">
           <div class="product-tl">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
+            <img id="image" src="" alt="image-main" />
             <div>
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
+              <img id="image_s1" src="" alt="image-sec1" />
+              <img id="image_s2" src="" alt="image-sec2" />
+              <img id="image_s3" src="" alt="image-sec3" />
             </div>
             <div>
               Зверніть увагу! Колірна гамма виробу залежить від налаштувань
@@ -206,32 +191,16 @@
             </div>
           </div>
           <div class="product-tr">
-            <h1>Блекаут Твін двосторонній</h1>
-            <p>1550.00 грн / пог.м</p>
+            <h1 id="title">...</h1>
+            <p id="price">1550.00 грн / пог.м</p>
             <div>
               <input type="text" value="1" class="input-ds" />
               <span>пог.м</span>
             </div>
             <div>
               <div>Кольор:</div>
-              <div>
+              <div id="colors">
                 <div class="selected">
-                  <img
-                    src="./assets/images/colors/black.png"
-                    alt="black"
-                    width="32"
-                    height="32"
-                  />
-                </div>
-                <div>
-                  <img
-                    src="./assets/images/colors/black.png"
-                    alt="black"
-                    width="32"
-                    height="32"
-                  />
-                </div>
-                <div>
                   <img
                     src="./assets/images/colors/black.png"
                     alt="black"
@@ -252,27 +221,27 @@
             <div>
               <div class="table-block">
                 <div>Склад</div>
-                <div>Поліестер</div>
+                <div id="composition">...</div>
               </div>
               <div class="table-block">
                 <div>Малюнок</div>
-                <div>Однотоний</div>
+                <div id="figure">...</div>
               </div>
               <div class="table-block">
                 <div>Виробник</div>
-                <div>Туреччина</div>
+                <div id="manufacturer">...</div>
               </div>
               <div class="table-block">
                 <div>Щільність тканини</div>
-                <div>Товста</div>
+                <div id="density">...</div>
               </div>
               <div class="table-block">
                 <div>Захист від сонця</div>
-                <div>8/10</div>
+                <div id="protection">...</div>
               </div>
               <div class="table-block">
                 <div>Догляд</div>
-                <div>Прання за температури 30</div>
+                <div id="care">...</div>
               </div>
             </div>
           </div>
@@ -281,7 +250,7 @@
             <div>
               Після замовлення з вами зв'яжуться працівники магазину, щоб
               уточнити деталі, такі як час виготовлення, вибір кріплення та
-              тасьми. Ви можете <a href="/">переглянути їх тут</a>.
+              тасьми. Ви можете переглянути їх тут.
             </div>
           </div>
           <div class="product-bl" id="last">
@@ -324,6 +293,94 @@
       <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      fetch(`./server/product/get_product.php?id=${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          let pages = document.getElementsByClassName("pages")[0];
+
+          let page1 = document.createElement("a");
+          page1.href = "/catalog";
+          page1.textContent = res.rows_i.catalog_name;
+          pages.appendChild(page1);
+
+          let img1 = document.createElement("img");
+          img1.src = "./assets/images/header/arrow.svg";
+          img1.alt = "arrow";
+          img1.width = 12;
+          img1.height = 12;
+          pages.appendChild(img1);
+
+          let page2 = document.createElement("a");
+          page2.href = `/subcatalog?id=${res.rows_i.sc_id}`;
+          page2.textContent = res.rows_i.subcatalog_name;
+          pages.appendChild(page2);
+
+          let img2 = document.createElement("img");
+          img2.src = "./assets/images/header/arrow.svg";
+          img2.alt = "arrow";
+          img2.width = 12;
+          img2.height = 12;
+          pages.appendChild(img2);
+
+          let page3 = document.createElement("div");
+          page3.textContent = res.rows.name;
+          page3.style.color = "#212121";
+          pages.appendChild(page3);
+
+          let colors = document.getElementById("colors");
+          res.rows.colors.split("/").forEach((element, i) => {
+            let block = document.createElement("div");
+            if (index === 0) block.classList.add("selected");
+            let svg = document.createElement("img");
+            svg.img = `./assets/images/colors/${element}`;
+            svg.alt = element;
+            svg.width = 32;
+            svg.height = 32;
+            block.appendChild(svg);
+            colors.appendChild(block);
+          });
+
+          document.getElementById("title").textContent = res.rows.name;
+
+          document.getElementById(
+            "image"
+          ).src = `./assets/images/products/${res.rows.image}`;
+          document.getElementById(
+            "image_s1"
+          ).src = `./assets/images/products/${res.rows.image_s1}`;
+          document.getElementById(
+            "image_s2"
+          ).src = `./assets/images/products/${res.rows.image_s2}`;
+          document.getElementById(
+            "image_s3"
+          ).src = `./assets/images/products/${res.rows.image_s3}`;
+
+          document.getElementById(
+            "price"
+          ).textContent = `${res.rows.price} грн / пог.м`;
+
+          document.getElementById("composition").textContent =
+            res.rows.composition;
+          document.getElementById("figure").textContent = res.rows.figure;
+          document.getElementById("manufacturer").textContent =
+            res.rows.manufacturer;
+          document.getElementById("density").textContent = res.rows.density;
+          document.getElementById("protection").textContent =
+            res.rows.protection;
+          document.getElementById("care").textContent = res.rows.care;
+        })
+        .catch((error) => console.error("Помилка загрузки продукта:", error));
+    </script>
 
     <script>
       function showInfo(id) {

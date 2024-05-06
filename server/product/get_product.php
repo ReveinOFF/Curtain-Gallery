@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                             WHERE p.id = $product
                                             LIMIT 1");
 
-    $result_i = $databaseManager->sendQuery("SELECT sc.name AS subcatalog_name, c.name AS catalog_name
+    $result_i = $databaseManager->sendQuery("SELECT sc.name AS subcatalog_name, c.name AS catalog_name, sc.id AS sc_id
                                             FROM products AS p
                                             JOIN subcatalog AS sc ON p.subcatalog_id = sc.id
                                             JOIN catalog AS c ON sc.catalog_id = c.id
@@ -21,11 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if ($result && $result_i) {
         if ($result->num_rows > 0 && $result_i->num_rows > 0) {
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-            $rows_i = $result_i->fetch_all(MYSQLI_ASSOC);
+            $rows = $result->fetch_all(MYSQLI_ASSOC)[0];
+            $rows_i = $result_i->fetch_all(MYSQLI_ASSOC)[0];
             http_response_code(200);
-            echo json_encode(array_merge($rows, $rows_i));
-            // $combined_rows = array("rows_i" => $rows_i, "rows" => $rows);
+            echo json_encode(array("rows_i" => $rows_i, "rows" => $rows));
         } else {
             http_response_code(204);
             echo json_encode(["message" => "No records found"]);

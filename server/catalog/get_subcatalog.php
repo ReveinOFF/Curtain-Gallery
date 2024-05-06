@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                             FROM subcatalog AS sc
                                             JOIN catalog AS c ON sc.catalog_id = c.id");
 
-
     unset($databaseManager);
 
     if ($result) {

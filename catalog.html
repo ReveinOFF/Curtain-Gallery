@@ -144,113 +144,67 @@
           height="12"
         />
       </div>
-      <div class="container-s">
-        <div class="catalog">
-          <h2>Штори</h2>
-          <div class="catalog_block">
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>xdrhn</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-          </div>
-        </div>
-        <div class="catalog">
-          <h2>Штори</h2>
-          <div class="catalog_block">
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>xdrhn</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-          </div>
-        </div>
-        <div class="catalog">
-          <h2>Штори</h2>
-          <div class="catalog_block">
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>xdrhn</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-          </div>
-        </div>
-        <div class="catalog">
-          <h2>Штори</h2>
-          <div class="catalog_block">
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>xdrhn</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-            <a href="/subcatalog">
-              <img src="./assets/images/catalog/c1.png" alt="c1" />
-              <p>drxthc</p>
-            </a>
-          </div>
-        </div>
-      </div>
+      <div class="container-s" id="catalog-list"></div>
     </main>
     <a href="/#contact" class="req-br">
       <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script>
+      fetch("./server/catalog/get_subcatalog.php", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          const groupedData = res.reduce((acc, curr) => {
+            const key = curr.catalog_name;
+            if (!acc[key]) {
+              acc[key] = [];
+            }
+            acc[key].push(curr);
+            return acc;
+          }, {});
+
+          let catalogs = document.getElementById("catalog-list");
+
+          Object.entries(groupedData).forEach(([catalogName, items]) => {
+            let catalogDiv = document.createElement("div");
+            catalogDiv.classList.add("catalog");
+
+            let h2 = document.createElement("h2");
+            h2.textContent = catalogName;
+            catalogDiv.appendChild(h2);
+
+            let catalogBlockDiv = document.createElement("div");
+            catalogBlockDiv.classList.add("catalog_block");
+
+            items.forEach((item) => {
+              let link = document.createElement("a");
+              link.href = `/subcatalog?id=${item.id}`;
+
+              let img = document.createElement("img");
+              img.src = `./assets/images/catalog/${item.image}`;
+              img.alt = item.image.split(".")[0];
+              link.appendChild(img);
+
+              let p = document.createElement("p");
+              p.textContent = item.name;
+              link.appendChild(p);
+
+              catalogBlockDiv.appendChild(link);
+
+              catalogDiv.appendChild(catalogBlockDiv);
+            });
+
+            catalogs.appendChild(catalogDiv);
+          });
+        })
+        .catch((error) => console.error("Помилка загрузки каталога:", error));
+    </script>
 
     <script src="./js/global.js"></script>
   </body>

@@ -101,6 +101,7 @@
 .product-tr > div:last-of-type > div:last-of-type > div {
   width: unset;
   position: relative;
+  cursor: pointer;
 }
 
 .product-tr > div:last-of-type > div:last-of-type > div:is(.selected)::before {
@@ -146,11 +147,6 @@
   font-weight: 400;
   line-height: 24px;
   color: #000000;
-}
-
-.product-bs div a {
-  font-weight: 600;
-  color: rgb(0, 152, 212);
 }
 
 .product-bl > div h3 {

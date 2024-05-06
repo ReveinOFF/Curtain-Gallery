@@ -1,7 +1,7 @@
 <?php
 require_once("../db/db_manager.php");
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $subcategory = $_GET['id'];
+    $subcategory = intval($_GET['id']);
 
     $databaseManager = new DatabaseManager();
 
@@ -18,10 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     unset($databaseManager);
 
     if ($result) {
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0 && $result_i->num_rows > 0) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
+            $rows_i = $result_i->fetch_all(MYSQLI_ASSOC)[0];
             http_response_code(200);
-            echo json_encode($rows);
+            echo json_encode(array("rows_i" => $rows_i, "rows" => $rows));
         } else {
             http_response_code(204);
             echo json_encode(["message" => "No records found"]);

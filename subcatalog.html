@@ -143,51 +143,83 @@
           width="12"
           height="12"
         />
-        <a href="/subcatalog">Штори</a>
-        <img
-          src="./assets/images/header/arrow.svg"
-          alt="arrow"
-          width="12"
-          height="12"
-        />
-        <div style="color: #212121">Штори</div>
       </div>
       <div class="subcatalog container-s">
-        <h2>Блекаут</h2>
-        <div class="products_block">
-          <a href="/product">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
-            <p>Блекаут Твін двосторонній</p>
-            <div>1550.00 грн / м.</div>
-          </a>
-          <a href="/product">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
-            <p>Блекаут Твін двосторонній</p>
-            <div>1550.00 грн / м.</div>
-            <div>Нема в наявності</div>
-          </a>
-          <a href="/product">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
-            <p>Блекаут Твін двосторонній</p>
-            <div>1550.00 грн / м.</div>
-          </a>
-          <a href="/product">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
-            <p>Блекаут Твін двосторонній</p>
-            <div>1550.00 грн / м.</div>
-          </a>
-          <a href="/product">
-            <img src="./assets/images/catalog/c1.png" alt="c1" />
-            <p>Блекаут Твін двосторонній</p>
-            <div>1550.00 грн / м.</div>
-          </a>
-        </div>
+        <h2 id="title">...</h2>
+        <div class="products_block"></div>
       </div>
     </main>
     <a href="/#contact" class="req-br">
       <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      fetch(`./server/subcatalog/get_products.php?id=${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          let pages = document.getElementsByClassName("pages")[0];
+
+          let page1 = document.createElement("a");
+          page1.href = "/catalog";
+          page1.textContent = res.rows_i.catalog_name;
+          pages.appendChild(page1);
+
+          let img1 = document.createElement("img");
+          img1.src = "./assets/images/header/arrow.svg";
+          img1.alt = "arrow";
+          img1.width = 12;
+          img1.height = 12;
+          pages.appendChild(img1);
+
+          let page2 = document.createElement("div");
+          page2.textContent = res.rows_i.subcatalog_name;
+          pages.appendChild(page2);
+
+          let title = document.getElementById("title");
+          title.textContent = res.rows_i.subcatalog_name;
+
+          let products_block =
+            document.getElementsByClassName("products_block")[0];
+
+          res.rows.forEach((element) => {
+            let link = document.createElement("a");
+            link.href = `/product?id=${element.id}`;
+
+            let m_img = document.createElement("img");
+            m_img.src = `./assets/images/products/${element.image}`;
+            m_img.alt = item.image.split(".")[0];
+            link.appendChild(m_img);
+
+            let p = document.createElement("p");
+            p.textContent = element.name;
+            link.appendChild(p);
+
+            let div = document.createElement("div");
+            div.textContent = `${element.price} грн / м.`;
+            link.appendChild(div);
+
+            if (element.is_exist !== "1") {
+              let div_ix = document.createElement("div");
+              div_ix.textContent = "Нема в наявності";
+              link.appendChild(div_ix);
+            }
+
+            products_block.appendChild(link);
+          });
+        })
+        .catch((error) =>
+          console.error("Помилка загрузки під-каталога:", error)
+        );
+    </script>
 
     <script src="./js/global.js"></script>
   </body>
