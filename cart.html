@@ -182,7 +182,7 @@
             <div>Вього:</div>
             <div id="totalPrice">00.00 грн</div>
           </div>
-          <button class="button-bg">До сплати</button>
+          <button class="button-bg" onclick="goOrder()">До сплати</button>
         </div>
       </div>
     </main>
@@ -194,92 +194,108 @@
     <script src="./js/cart.js"></script>
 
     <script>
-      const ids = [];
-      const data = getCartData();
+      function goOrder() {
+        window.location.href = "/order";
+      }
 
+      function priceTotal(data) {
+        const totalPrice = data
+          .reduce((sum, item) => sum + parseFloat(item.price), 0)
+          .toFixed(2);
+        document.getElementById("totalPrice").textContent = `${totalPrice} грн`;
+      }
+
+      let data = getCartData();
+
+      let cart_block = document.getElementById("cart_block");
       data.forEach((element) => {
-        ids.push(element.id);
+        let cart_item = document.createElement("div");
+        cart_item.className = "cart-prod";
+        cart_item.id = element.id;
+
+        let div1 = document.createElement("div");
+        let img = document.createElement("img");
+        img.src = `./assets/images/products/${element.image}`;
+        img.alt = element.image.split(".")[0];
+        div1.appendChild(img);
+        let div11 = document.createElement("div");
+        div11.className = "cart-prod-inf";
+        let div111 = document.createElement("div");
+        let span111 = document.createElement("span");
+        span111.textContent = "Тканина для штор:";
+        let text111 = document.createTextNode(` ${element.name}`);
+        div111.appendChild(span111);
+        div111.appendChild(text111);
+        div11.appendChild(div111);
+        let div112 = document.createElement("div");
+        let span112 = document.createElement("span");
+        span112.textContent = "Колір:";
+        let text112 = document.createTextNode(` ${element.color}`);
+        div112.appendChild(span112);
+        div112.appendChild(text112);
+        div11.appendChild(div112);
+        div1.appendChild(div11);
+        cart_item.appendChild(div1);
+
+        let div2 = document.createElement("div");
+        div2.className = "cart-prod-num";
+        let input = document.createElement("input");
+        input.type = "text";
+        input.className = "input-ds";
+        input.id = `input-${element.id}`;
+        input.value = data.find((item) => item.id === element.id).value;
+        input.oninput = function (event) {
+          setTimeout(() => {
+            const existingData = getCartData();
+            const updatedData = existingData.map((item) => {
+              if (item.id == event.target.id.split("-")[1]) {
+                return {
+                  ...item,
+                  value: event.target.value,
+                  price: element.mainprice * event.target.value,
+                };
+              }
+              return item;
+            });
+            localStorage.setItem("cart", JSON.stringify(updatedData));
+            data = getCartData();
+            priceTotal(data);
+            let pb = document.getElementById(element.id);
+            let price = data
+              .find((item) => item.id == element.id)
+              .price.toFixed(2);
+            pb.children[2].textContent = `${price} грн`;
+          }, 1000);
+        };
+        div2.appendChild(input);
+        let span = document.createElement("span");
+        span.textContent = "пог.м";
+        div2.appendChild(span);
+        cart_item.appendChild(div2);
+
+        let div3 = document.createElement("div");
+        div3.textContent = `${element.price.toFixed(2)} грн`;
+        div3.className = "cart-prod-price";
+        cart_item.appendChild(div3);
+
+        let close = document.createElement("img");
+        close.src = "./assets/images/home/close.svg";
+        close.alt = "remove";
+        close.width = 21;
+        close.height = 21;
+        close.onclick = function () {
+          removeCartItem(element.id);
+          let remove = document.getElementById(element.id);
+          document.getElementById("cart_block").removeChild(remove);
+          data = getCartData();
+          priceTotal(data);
+        };
+        cart_item.appendChild(close);
+
+        cart_block.appendChild(cart_item);
+
+        priceTotal(data);
       });
-
-      fetch(`./server/cart/getCart.php?ids=${ids.join(",")}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          let cart_block = document.getElementById("cart_block");
-          res.forEach((element) => {
-            let cart_item = document.createElement("div");
-            cart_item.className = "cart-prod";
-            cart_item.id = element.id;
-
-            let div1 = document.createElement("div");
-            let img = document.createElement("img");
-            img.src = `./assets/images/products/${element.image}`;
-            img.alt = element.image.split(".")[0];
-            div1.appendChild(img);
-            let div11 = document.createElement("div");
-            div11.className = "cart-prod-inf";
-            let div111 = document.createElement("div");
-            let span111 = document.createElement("span");
-            span111.textContent = "Тканина для штор:";
-            let text111 = document.createTextNode(` ${element.name}`);
-            div111.appendChild(span111);
-            div111.appendChild(text111);
-            div11.appendChild(div111);
-            let div112 = document.createElement("div");
-            let span112 = document.createElement("span");
-            span112.textContent = "Колір:";
-            let text112 = document.createTextNode(` ${element.colors}`);
-            div112.appendChild(span112);
-            div112.appendChild(text112);
-            div11.appendChild(div112);
-            div1.appendChild(div11);
-            cart_item.appendChild(div1);
-
-            let div2 = document.createElement("div");
-            div2.className = "cart-prod-num";
-            let input = document.createElement("input");
-            input.type = "text";
-            input.className = "input-ds";
-            input.value = data.find((item) => item.id === element.id).value;
-            div2.appendChild(input);
-            let span = document.createElement("span");
-            span.textContent = "пог.м";
-            div2.appendChild(span);
-            cart_item.appendChild(div2);
-
-            let div3 = document.createElement("div");
-            div3.textContent = `${element.price} грн`;
-            div3.className = "cart-prod-price";
-            cart_item.appendChild(div3);
-
-            let close = document.createElement("img");
-            close.src = "./assets/images/home/close.svg";
-            close.alt = "remove";
-            close.width = 21;
-            close.height = 21;
-            close.onclick = function () {
-              removeCartItem(element.id);
-              let remove = document.getElementById(element.id);
-              document
-                .getElementsByClassName("cart_block")[0]
-                .removeChild(remove);
-            };
-            cart_item.appendChild(close);
-
-            cart_block.appendChild(cart_item);
-          });
-          const totalPrice = res
-            .reduce((sum, item) => sum + parseFloat(item.price), 0)
-            .toFixed(2);
-          document.getElementById(
-            "totalPrice"
-          ).textContent = `${totalPrice} грн`;
-        })
-        .catch((error) => console.error("Помилка загрузки продукта:", error));
     </script>
 
     <script src="./js/header.js"></script>

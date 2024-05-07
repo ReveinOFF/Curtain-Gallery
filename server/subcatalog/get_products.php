@@ -17,18 +17,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     unset($databaseManager);
 
-    if ($result) {
-        if ($result->num_rows > 0 && $result_i->num_rows > 0) {
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-            $rows_i = $result_i->fetch_all(MYSQLI_ASSOC)[0];
-            http_response_code(200);
-            echo json_encode(array("rows_i" => $rows_i, "rows" => $rows));
-        } else {
-            http_response_code(204);
-            echo json_encode(["message" => "No records found"]);
-        }
+    if ($result->num_rows > 0 && $result_i->num_rows > 0) {
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $rows_i = $result_i->fetch_all(MYSQLI_ASSOC)[0];
+        http_response_code(200);
+        echo json_encode(["rows" => $rows, "rows_i" => $rows_i]);
+    } elseif ($result->num_rows > 0) {
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        http_response_code(200);
+        echo json_encode(["rows" => $rows]);
+    } elseif ($result_i->num_rows > 0) {
+        $rows_i = $result_i->fetch_all(MYSQLI_ASSOC)[0];
+        http_response_code(200);
+        echo json_encode(["rows_i" => $rows_i]);
     } else {
-        http_response_code(500);
-        echo json_encode(["message" => "Database error"]);
+        http_response_code(204);
+        echo json_encode(["message" => "No records found"]);
     }
 }

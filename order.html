@@ -196,8 +196,8 @@
             <div class="pay-sel">
               <h2>Вибір предплати</h2>
               <div>
-                <div class="checkbox checked">
-                  <input type="checkbox" checked />
+                <div class="checkbox checked" onclick="changeCheck(event)">
+                  <input type="checkbox" checked value="100" />
                   <svg
                     width="18"
                     height="14"
@@ -214,8 +214,8 @@
                 <div>100% передплата</div>
               </div>
               <div>
-                <div class="checkbox">
-                  <input type="checkbox" />
+                <div class="checkbox" onclick="changeCheck(event)">
+                  <input type="checkbox" value="50" />
                   <svg
                     width="18"
                     height="14"
@@ -232,8 +232,8 @@
                 <div>50% передплата</div>
               </div>
               <div>
-                <div class="checkbox">
-                  <input type="checkbox" />
+                <div class="checkbox" onclick="changeCheck(event)">
+                  <input type="checkbox" value="30" />
                   <svg
                     width="18"
                     height="14"
@@ -288,47 +288,20 @@
           <div>
             <div class="cart">
               <h2>Ваш кошик</h2>
-              <div>
-                <img src="./assets/images/catalog/c1.png" alt="c1" />
-                <div class="cart-inf">
-                  <div>
-                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
-                  </div>
-                  <div><span>Колір:</span> Чорний</div>
-                </div>
-              </div>
-              <div>
-                <img src="./assets/images/catalog/c1.png" alt="c1" />
-                <div class="cart-inf">
-                  <div>
-                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
-                  </div>
-                  <div><span>Колір:</span> Чорний</div>
-                </div>
-              </div>
-              <div>
-                <img src="./assets/images/catalog/c1.png" alt="c1" />
-                <div class="cart-inf">
-                  <div>
-                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
-                  </div>
-                  <div><span>Колір:</span> Чорний</div>
-                </div>
-              </div>
             </div>
             <div class="order-sum">
               <h2>Підсумок замовлення</h2>
               <div>
                 <div>За все:</div>
-                <div>5500.00 грн</div>
+                <div id="price-all">00.00 грн</div>
               </div>
               <div>
-                <div>50% передплата</div>
-                <div>2750.00 грн</div>
+                <div id="procent">100% передплата</div>
+                <div id="price-procent">00.00 грн</div>
               </div>
               <div>
                 <div>Вього:</div>
-                <div>2750.00 грн</div>
+                <div id="price-total">00.00 грн</div>
               </div>
               <button class="button-bg">Оплатити</button>
             </div>
@@ -342,6 +315,112 @@
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
     <script src="./js/cart.js"></script>
+
+    <script>
+      const data = getCartData();
+
+      let order_block = document.getElementsByClassName("cart")[0];
+
+      data.forEach((element) => {
+        let item_div = document.createElement("div");
+
+        let img = document.createElement("img");
+        img.src = `./assets/images/products/${element.image}`;
+        img.alt = element.image.split(".")[0];
+        item_div.appendChild(img);
+
+        let inside_div = document.createElement("div");
+        inside_div.className = "cart-inf";
+
+        let div1 = document.createElement("div");
+        let span1 = document.createElement("span");
+        span1.textContent = "Тканина для штор:";
+        let text1 = document.createTextNode(` ${element.name}`);
+        div1.appendChild(span1);
+        div1.appendChild(text1);
+        inside_div.appendChild(div1);
+
+        let div2 = document.createElement("div");
+        let span2 = document.createElement("span");
+        span2.textContent = "Колір:";
+        let text2 = document.createTextNode(` ${element.color}`);
+        div2.appendChild(span2);
+        div2.appendChild(text2);
+        inside_div.appendChild(div2);
+
+        item_div.appendChild(inside_div);
+        order_block.appendChild(item_div);
+      });
+
+      const totalPrice = data
+        .reduce((sum, item) => sum + parseFloat(item.price), 0)
+        .toFixed(2);
+      document.getElementById("price-all").textContent = `${totalPrice} грн`;
+      document.getElementById(
+        "price-procent"
+      ).textContent = `${totalPrice} грн`;
+      document.getElementById("price-total").textContent = `${totalPrice} грн`;
+    </script>
+
+    <script>
+      function changeCheck(e) {
+        document
+          .getElementsByClassName("checked")[0]
+          .classList.remove("checked");
+
+        document.querySelectorAll(
+          "input[type='checkbox']:checked"
+        )[0].checked = false;
+
+        e.currentTarget.classList.add("checked");
+        e.currentTarget.querySelector("input[type='checkbox']").checked = true;
+
+        switch (
+          parseInt(
+            e.currentTarget.querySelector("input[type='checkbox']").value
+          )
+        ) {
+          case 100:
+            priceCalc(1);
+            break;
+          case 50:
+            priceCalc(0.5);
+            break;
+          case 30:
+            priceCalc(0.3);
+            break;
+        }
+      }
+
+      function priceCalc(num) {
+        const data = getCartData();
+
+        const totalPrice = data
+          .reduce((sum, item) => sum + parseFloat(item.price), 0)
+          .toFixed(2);
+        document.getElementById("price-procent").textContent = `${(
+          totalPrice * num
+        ).toFixed(2)} грн`;
+
+        let procent = document.getElementById("procent");
+
+        switch (num) {
+          case 1:
+            procent.textContent = "100% передплата";
+            break;
+          case 0.5:
+            procent.textContent = "50% передплата";
+            break;
+          case 0.3:
+            procent.textContent = "30% передплата";
+            break;
+        }
+        // document.getElementById(
+        //   "price-total"
+        // ).textContent = `${totalPrice} грн`;
+      }
+    </script>
+
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>
