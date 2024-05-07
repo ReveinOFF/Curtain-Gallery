@@ -168,25 +168,26 @@
         />
         <div>
           <h2>Додано в кошик</h2>
-          <img
-            src="./assets/images/catalog/c1.png"
-            alt="c1"
-            width="398"
-            height="194"
-          />
-          <div class="cart_info">
-            <span>Тканина для штор:</span> Блекаут Твін двосторонній
+          <img src="" alt="c1" width="398" height="194" id="modal-img" />
+          <div class="cart_info" id="modal-title">
+            <span>Тканина для штор:</span>
           </div>
-          <div class="cart_info"><span>Колір:</span> Чорний</div>
+          <div class="cart_info" id="modal-color"><span>Колір:</span></div>
           <div class="cart_info-m">
             <div>
-              <input type="text" class="input-ds" value="1" id="modal-inp" />
+              <input
+                type="text"
+                class="input-ds"
+                value="1"
+                id="modal-inp"
+                disabled
+              />
               <div>пог.м</div>
             </div>
-            <div>5500.00 грн</div>
+            <div id="modal-price">00.00 грн</div>
           </div>
         </div>
-        <button class="button-bg" onclick="addCart()">До кошика</button>
+        <button class="button-bg" onclick="goCart()">До кошика</button>
       </div>
     </div>
     <main>
@@ -356,10 +357,16 @@
           let colors = document.getElementById("colors");
           res.rows.colors.split("/").forEach((element, i) => {
             let block = document.createElement("div");
+            block.onclick = function (event) {
+              document
+                .getElementsByClassName("selected")[0]
+                .classList.remove("selected");
+              event.currentTarget.classList.add("selected");
+            };
             if (i === 0) block.classList.add("selected");
             let svg = document.createElement("img");
-            svg.img = `./assets/images/colors/${element}`;
-            svg.alt = element;
+            svg.src = `./assets/images/colors/${element}`;
+            svg.alt = element.split(".")[0];
             svg.width = 32;
             svg.height = 32;
             block.appendChild(svg);
@@ -368,18 +375,18 @@
 
           document.getElementById("title").textContent = res.rows.name;
 
-          document.getElementById(
-            "image"
-          ).src = `./assets/images/products/${res.rows.image}`;
-          document.getElementById(
-            "image_s1"
-          ).src = `./assets/images/products/${res.rows.image_s1}`;
-          document.getElementById(
-            "image_s2"
-          ).src = `./assets/images/products/${res.rows.image_s2}`;
-          document.getElementById(
-            "image_s3"
-          ).src = `./assets/images/products/${res.rows.image_s3}`;
+          let imgM1 = document.getElementById("image");
+          imgM1.src = `./assets/images/products/${res.rows.image}`;
+          imgM1.alt = res.rows.image.split(".")[0];
+          let imgM11 = document.getElementById("image_s1");
+          imgM11.src = `./assets/images/products/${res.rows.image_s1}`;
+          imgM11.alt = res.rows.image_s1.split(".")[0];
+          let imgM12 = document.getElementById("image_s2");
+          imgM12.src = `./assets/images/products/${res.rows.image_s2}`;
+          imgM12.alt = res.rows.image_s2.split(".")[0];
+          let imgM13 = document.getElementById("image_s3");
+          imgM12.src = `./assets/images/products/${res.rows.image_s3}`;
+          imgM12.alt = res.rows.image_s3.split(".")[0];
 
           document.getElementById(
             "price"
@@ -399,12 +406,25 @@
     </script>
 
     <script>
+      function goCart() {
+        window.location.href = "/cart";
+      }
+
       function addCart() {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
-        const cartValue = parseFloat(localStorage.getItem("tempValue"));
 
-        updateCartData({ id: id, value: cartValue });
+        updateCartData({
+          id: id,
+          name: document.getElementById("title").textContent,
+          image: document.getElementById("image").src.split("/").pop(),
+          color: document.getElementsByClassName("selected")[0].children[0].alt,
+          price: (
+            parseFloat(document.getElementById("price").textContent) *
+            document.getElementById("value-inp").value
+          ).toFixed(2),
+          value: document.getElementById("value-inp").value,
+        });
 
         closeModal();
       }
@@ -427,15 +447,42 @@
       }
 
       function showModal() {
-        const value = document.getElementById("value-inp").value;
-        localStorage.setItem("tempValue", value);
+        let modalTitle = document.getElementById("modal-title");
+        if (modalTitle.childNodes.length > 2) {
+          modalTitle.removeChild(modalTitle.lastChild);
+        }
+        let modalColor = document.getElementById("modal-color");
+        if (modalColor.childNodes.length > 1) {
+          modalColor.removeChild(modalColor.lastChild);
+        }
+
+        document.getElementById(
+          "modal-img"
+        ).src = `./assets/images/products/${document
+          .getElementById("image")
+          .src.split("/")
+          .pop()}`;
+        const title = document.createTextNode(
+          ` ${document.getElementById("title").textContent}`
+        );
+        modalTitle.appendChild(title);
+        const color = document.createTextNode(
+          ` ${document.getElementsByClassName("selected")[0].children[0].alt}`
+        );
+        modalColor.appendChild(color);
+        document.getElementById("modal-inp").value =
+          document.getElementById("value-inp").value;
+        document.getElementById("modal-price").textContent = `${(
+          parseFloat(document.getElementById("price").textContent) *
+          parseInt(document.getElementById("value-inp").value)
+        ).toFixed(2)} грн`;
+
+        addCart();
         document.getElementById("cart_modal").classList.add("active");
         disScroll();
-        document.getElementById("modal-inp").value = value;
 
         setTimeout(() => {
           document.addEventListener("click", eventCloseCare);
-          document.getElementById("modal-inp").value = value;
         }, 500);
       }
     </script>

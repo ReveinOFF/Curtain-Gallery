@@ -26,24 +26,21 @@ fetch("./server/catalog/get_subcatalog.php", {
     Object.entries(groupedData).forEach(([catalogName, items]) => {
       items.forEach((element) => {
         let link = document.createElement("a");
+        link.href = `/subcatalog?id=${element.id}`;
+        link.textContent = element.name;
+
         switch (catalogName) {
           case "Штори":
-            link.href = `/subcatalog?id=${element.id}`;
-            link.textContent = element.name;
             catalog_s1.appendChild(link);
-            catalog_sm1.appendChild(link);
+            catalog_sm1.appendChild(link.cloneNode(true));
             break;
           case "Тюль":
-            link.href = `/subcatalog?id=${element.id}`;
-            link.textContent = element.name;
             catalog_s2.appendChild(link);
-            catalog_sm2.appendChild(link);
+            catalog_sm2.appendChild(link.cloneNode(true));
             break;
           case "Тасьма":
-            link.href = `/subcatalog?id=${element.id}`;
-            link.textContent = element.name;
             catalog_s3.appendChild(link);
-            catalog_sm3.appendChild(link);
+            catalog_sm3.appendChild(link.cloneNode(true));
             break;
         }
       });

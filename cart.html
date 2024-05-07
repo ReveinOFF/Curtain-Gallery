@@ -175,57 +175,12 @@
             <div>Кількість</div>
             <div>Ціна</div>
           </div>
-          <div class="cart-bp">
-            <div class="cart-prod">
-              <div>
-                <img src="./assets/images/catalog/c1.png" alt="c1" />
-                <div class="cart-prod-inf">
-                  <div>
-                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
-                  </div>
-                  <div><span>Колір:</span> Чорний</div>
-                </div>
-              </div>
-              <div class="cart-prod-num">
-                <input type="text" class="input-ds" value="1" />
-                <span>пог.м</span>
-              </div>
-              <div class="cart-prod-price">5500.00 грн</div>
-              <img
-                src="./assets/images/home/close.svg"
-                alt="remove"
-                width="21"
-                height="21"
-              />
-            </div>
-            <div class="cart-prod">
-              <div>
-                <img src="./assets/images/catalog/c1.png" alt="c1" />
-                <div class="cart-prod-inf">
-                  <div>
-                    <span>Тканина для штор:</span> Блекаут Твін двосторонній
-                  </div>
-                  <div><span>Колір:</span> Чорний</div>
-                </div>
-              </div>
-              <div class="cart-prod-num">
-                <input type="text" class="input-ds" value="1" />
-                <span>пог.м</span>
-              </div>
-              <div class="cart-prod-price">5500.00 грн</div>
-              <img
-                src="./assets/images/home/close.svg"
-                alt="remove"
-                width="21"
-                height="21"
-              />
-            </div>
-          </div>
+          <div class="cart-bp" id="cart_block"></div>
         </div>
         <div class="cart-sum">
           <div>
             <div>Вього:</div>
-            <div>5500.00 грн</div>
+            <div id="totalPrice">00.00 грн</div>
           </div>
           <button class="button-bg">До сплати</button>
         </div>
@@ -237,6 +192,96 @@
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
     <script src="./js/cart.js"></script>
+
+    <script>
+      const ids = [];
+      const data = getCartData();
+
+      data.forEach((element) => {
+        ids.push(element.id);
+      });
+
+      fetch(`./server/cart/getCart.php?ids=${ids.join(",")}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          let cart_block = document.getElementById("cart_block");
+          res.forEach((element) => {
+            let cart_item = document.createElement("div");
+            cart_item.className = "cart-prod";
+            cart_item.id = element.id;
+
+            let div1 = document.createElement("div");
+            let img = document.createElement("img");
+            img.src = `./assets/images/products/${element.image}`;
+            img.alt = element.image.split(".")[0];
+            div1.appendChild(img);
+            let div11 = document.createElement("div");
+            div11.className = "cart-prod-inf";
+            let div111 = document.createElement("div");
+            let span111 = document.createElement("span");
+            span111.textContent = "Тканина для штор:";
+            let text111 = document.createTextNode(` ${element.name}`);
+            div111.appendChild(span111);
+            div111.appendChild(text111);
+            div11.appendChild(div111);
+            let div112 = document.createElement("div");
+            let span112 = document.createElement("span");
+            span112.textContent = "Колір:";
+            let text112 = document.createTextNode(` ${element.colors}`);
+            div112.appendChild(span112);
+            div112.appendChild(text112);
+            div11.appendChild(div112);
+            div1.appendChild(div11);
+            cart_item.appendChild(div1);
+
+            let div2 = document.createElement("div");
+            div2.className = "cart-prod-num";
+            let input = document.createElement("input");
+            input.type = "text";
+            input.className = "input-ds";
+            input.value = data.find((item) => item.id === element.id).value;
+            div2.appendChild(input);
+            let span = document.createElement("span");
+            span.textContent = "пог.м";
+            div2.appendChild(span);
+            cart_item.appendChild(div2);
+
+            let div3 = document.createElement("div");
+            div3.textContent = `${element.price} грн`;
+            div3.className = "cart-prod-price";
+            cart_item.appendChild(div3);
+
+            let close = document.createElement("img");
+            close.src = "./assets/images/home/close.svg";
+            close.alt = "remove";
+            close.width = 21;
+            close.height = 21;
+            close.onclick = function () {
+              removeCartItem(element.id);
+              let remove = document.getElementById(element.id);
+              document
+                .getElementsByClassName("cart_block")[0]
+                .removeChild(remove);
+            };
+            cart_item.appendChild(close);
+
+            cart_block.appendChild(cart_item);
+          });
+          const totalPrice = res
+            .reduce((sum, item) => sum + parseFloat(item.price), 0)
+            .toFixed(2);
+          document.getElementById(
+            "totalPrice"
+          ).textContent = `${totalPrice} грн`;
+        })
+        .catch((error) => console.error("Помилка загрузки продукта:", error));
+    </script>
+
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>

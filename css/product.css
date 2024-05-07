@@ -99,9 +99,9 @@
 }
 
 .product-tr > div:last-of-type > div:last-of-type > div {
+  cursor: pointer;
   width: unset;
   position: relative;
-  cursor: pointer;
 }
 
 .product-tr > div:last-of-type > div:last-of-type > div:is(.selected)::before {

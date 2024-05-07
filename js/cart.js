@@ -1,5 +1,5 @@
 updateCartData = (newData) => {
-  const existingData = this.getCartData();
+  const existingData = getCartData();
   const updatedData = [...existingData, newData];
   localStorage.setItem("cart", JSON.stringify(updatedData));
 
@@ -8,7 +8,7 @@ updateCartData = (newData) => {
 };
 
 removeCartItem = (itemId) => {
-  const existingData = this.getCartData();
+  const existingData = getCartData();
   const updatedData = existingData.filter((item) => item.id !== itemId);
   localStorage.setItem("cart", JSON.stringify(updatedData));
 
@@ -19,7 +19,7 @@ removeCartItem = (itemId) => {
 };
 
 isCartEmpty = () => {
-  const cartData = this.getCartData();
+  const cartData = getCartData();
   return cartData.length === 0;
 };
 
