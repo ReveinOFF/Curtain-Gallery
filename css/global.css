@@ -279,13 +279,17 @@ textarea {
   font-size: 18px;
   font-weight: 400;
   line-height: 24.51px;
-  color: #e2e2e2;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.mob_burg > div > a::before {
+.mob_burg > div > a::before,
+.hm_nav > div:first-of-type::before,
+#catalog_sm1 > a::before,
+#catalog_sm2 > a::before,
+#catalog_sm3 > a::before {
   content: "";
   background-image: url(../assets/images/home/line.svg);
   width: 0px;
@@ -295,7 +299,11 @@ textarea {
   transition: all 0.1s;
 }
 
-.mob_burg > div > a:hover::before {
+.mob_burg > div > a:hover::before,
+.hm_nav > div:first-of-type:hover::before,
+#catalog_sm1 > a:hover::before,
+#catalog_sm2 > a:hover::before,
+#catalog_sm3 > a:hover::before {
   width: 21px;
   opacity: 1;
   visibility: visible;
@@ -303,6 +311,86 @@ textarea {
 
 .mob_burg > div > a:hover {
   color: #ffffff;
+}
+
+.hm_nav > div:first-of-type {
+  cursor: pointer;
+  gap: 8px;
+}
+
+.exist::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff8720;
+  border-radius: 50%;
+  bottom: -4px;
+  right: 0;
+}
+
+.title-hm {
+  gap: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.hm_nav > div:first-of-type > .title-hm > span {
+  font-family: Open Sans;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24.51px;
+  color: #ffffff;
+}
+
+.hm_nav > div:first-of-type > .title-hm > img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(42deg)
+    brightness(104%) contrast(101%);
+  transition: all 0.3s;
+}
+
+.hm_nav:is(.active) > div:first-of-type > .title-hm > img {
+  rotate: 90deg;
+  filter: invert(81%) sepia(5%) saturate(12%) hue-rotate(319deg) brightness(93%)
+    contrast(81%);
+}
+
+.hm_nav:is(.active) > div:first-of-type > .title-hm > span {
+  color: #b6b6b6;
+}
+
+.hm_nav {
+  display: grid;
+  grid-template-rows: 0.1fr 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 500ms;
+}
+
+.hm_nav:is(.active) {
+  grid-template-rows: 0.1fr 1fr;
+}
+
+#catalog_sm1,
+#catalog_sm2,
+#catalog_sm3 {
+  display: grid;
+  margin-left: 26px;
+  gap: 14px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+#catalog_sm1 a,
+#catalog_sm2 a,
+#catalog_sm3 a {
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.79px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .h_select {

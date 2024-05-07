@@ -47,3 +47,9 @@ function showCatalog(num) {
     );
   }
 }
+
+function showMobCatalog(num) {
+  let nav = document.getElementsByClassName("hm_nav")[num - 1];
+  if (nav.classList.contains("active")) nav.classList.remove("active");
+  else nav.classList.add("active");
+}

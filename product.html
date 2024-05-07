@@ -46,14 +46,7 @@
               class="arrow_ss"
             />
           </div>
-          <div id="catalog_s1" class="burger_th">
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-          </div>
+          <div id="catalog_s1" class="burger_th"></div>
         </div>
         <div class="h_select">
           <div class="align_center" onclick="showCatalog(2)">
@@ -67,14 +60,7 @@
               class="arrow_ss"
             />
           </div>
-          <div id="catalog_s2" class="burger_th">
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-          </div>
+          <div id="catalog_s2" class="burger_th"></div>
         </div>
         <div class="h_select">
           <div class="align_center" onclick="showCatalog(3)">
@@ -88,17 +74,10 @@
               class="arrow_ss"
             />
           </div>
-          <div id="catalog_s3" class="burger_th">
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-          </div>
+          <div id="catalog_s3" class="burger_th"></div>
         </div>
         <a href="/catalog">Інше</a>
-        <a href="/cart">
+        <a href="/cart" style="display: flex; position: relative" id="cart-btn">
           <img
             src="./assets/images/header/cart.svg"
             alt="cart"
@@ -124,12 +103,56 @@
             onclick="closeBurger()"
           />
           <div>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
-            <a href="/">Блекаут</a>
+            <a href="/" style="margin-bottom: 10px">Головна</a>
+            <div class="hm_nav">
+              <div class="align_center" onclick="showMobCatalog(1)">
+                <div class="title-hm">
+                  <span>Штори</span>
+                  <img
+                    src="./assets/images/header/arrow.svg"
+                    alt="arrow"
+                    height="12"
+                    width="6"
+                    id="arrow_s1"
+                    class="arrow_ss"
+                  />
+                </div>
+              </div>
+              <div id="catalog_sm1"></div>
+            </div>
+            <div class="hm_nav">
+              <div class="align_center" onclick="showMobCatalog(2)">
+                <div class="title-hm">
+                  <span>Тюль</span>
+                  <img
+                    src="./assets/images/header/arrow.svg"
+                    alt="arrow"
+                    height="12"
+                    width="6"
+                    id="arrow_s1"
+                    class="arrow_ss"
+                  />
+                </div>
+              </div>
+              <div id="catalog_sm2"></div>
+            </div>
+            <div class="hm_nav">
+              <div class="align_center" onclick="showMobCatalog(3)">
+                <div class="title-hm">
+                  <span>Тасьма</span>
+                  <img
+                    src="./assets/images/header/arrow.svg"
+                    alt="arrow"
+                    height="12"
+                    width="6"
+                    id="arrow_s1"
+                    class="arrow_ss"
+                  />
+                </div>
+              </div>
+              <div id="catalog_sm3"></div>
+            </div>
+            <a href="/catalog">Інше</a>
           </div>
         </div>
       </div>
@@ -157,13 +180,13 @@
           <div class="cart_info"><span>Колір:</span> Чорний</div>
           <div class="cart_info-m">
             <div>
-              <input type="text" class="input-ds" value="1" />
+              <input type="text" class="input-ds" value="1" id="modal-inp" />
               <div>пог.м</div>
             </div>
             <div>5500.00 грн</div>
           </div>
         </div>
-        <button class="button-bg">До кошика</button>
+        <button class="button-bg" onclick="addCart()">До кошика</button>
       </div>
     </div>
     <main>
@@ -194,21 +217,12 @@
             <h1 id="title">...</h1>
             <p id="price">1550.00 грн / пог.м</p>
             <div>
-              <input type="text" value="1" class="input-ds" />
+              <input type="text" value="1" class="input-ds" id="value-inp" />
               <span>пог.м</span>
             </div>
             <div>
               <div>Кольор:</div>
-              <div id="colors">
-                <div class="selected">
-                  <img
-                    src="./assets/images/colors/black.png"
-                    alt="black"
-                    width="32"
-                    height="32"
-                  />
-                </div>
-              </div>
+              <div id="colors"></div>
             </div>
             <button class="button-bg" onclick="showModal()">
               Додати в кошик
@@ -221,27 +235,27 @@
             <div>
               <div class="table-block">
                 <div>Склад</div>
-                <div id="composition">...</div>
+                <div id="composition">-</div>
               </div>
               <div class="table-block">
                 <div>Малюнок</div>
-                <div id="figure">...</div>
+                <div id="figure">-</div>
               </div>
               <div class="table-block">
                 <div>Виробник</div>
-                <div id="manufacturer">...</div>
+                <div id="manufacturer">-</div>
               </div>
               <div class="table-block">
                 <div>Щільність тканини</div>
-                <div id="density">...</div>
+                <div id="density">-</div>
               </div>
               <div class="table-block">
                 <div>Захист від сонця</div>
-                <div id="protection">...</div>
+                <div id="protection">-</div>
               </div>
               <div class="table-block">
                 <div>Догляд</div>
-                <div id="care">...</div>
+                <div id="care">-</div>
               </div>
             </div>
           </div>
@@ -289,10 +303,12 @@
         </div>
       </div>
     </main>
-    <a href="/#contact" class="req-br">
+    <a href="/#contact" class="req-br" style="z-index: 5">
       <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
+
+    <script src="./js/cart.js"></script>
 
     <script>
       const urlParams = new URLSearchParams(window.location.search);
@@ -340,7 +356,7 @@
           let colors = document.getElementById("colors");
           res.rows.colors.split("/").forEach((element, i) => {
             let block = document.createElement("div");
-            if (index === 0) block.classList.add("selected");
+            if (i === 0) block.classList.add("selected");
             let svg = document.createElement("img");
             svg.img = `./assets/images/colors/${element}`;
             svg.alt = element;
@@ -383,6 +399,16 @@
     </script>
 
     <script>
+      function addCart() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+        const cartValue = parseFloat(localStorage.getItem("tempValue"));
+
+        updateCartData({ id: id, value: cartValue });
+
+        closeModal();
+      }
+
       function showInfo(id) {
         let info = document.getElementById(id);
 
@@ -401,16 +427,20 @@
       }
 
       function showModal() {
+        const value = document.getElementById("value-inp").value;
+        localStorage.setItem("tempValue", value);
         document.getElementById("cart_modal").classList.add("active");
         disScroll();
+        document.getElementById("modal-inp").value = value;
 
-        setTimeout(
-          () => document.addEventListener("click", eventCloseCare),
-          500
-        );
+        setTimeout(() => {
+          document.addEventListener("click", eventCloseCare);
+          document.getElementById("modal-inp").value = value;
+        }, 500);
       }
     </script>
 
+    <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>
 </html>
