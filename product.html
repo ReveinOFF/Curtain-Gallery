@@ -225,7 +225,7 @@
               <div>Кольор:</div>
               <div id="colors"></div>
             </div>
-            <button class="button-bg" onclick="showModal()">
+            <button class="button-bg" onclick="showModal()" id="cart-btn">
               Додати в кошик
             </button>
           </div>
@@ -325,6 +325,10 @@
         .then((res) => {
           let pages = document.getElementsByClassName("pages")[0];
 
+          if (parseInt(res.rows.is_exist) == 0) {
+            document.getElementById("cart-btn").disabled = true;
+          }
+
           let page1 = document.createElement("a");
           page1.href = "/catalog";
           page1.textContent = res.rows_i.catalog_name;
@@ -385,8 +389,8 @@
           imgM12.src = `./assets/images/products/${res.rows.image_s2}`;
           imgM12.alt = res.rows.image_s2.split(".")[0];
           let imgM13 = document.getElementById("image_s3");
-          imgM12.src = `./assets/images/products/${res.rows.image_s3}`;
-          imgM12.alt = res.rows.image_s3.split(".")[0];
+          imgM13.src = `./assets/images/products/${res.rows.image_s3}`;
+          imgM13.alt = res.rows.image_s3.split(".")[0];
 
           document.getElementById(
             "price"
