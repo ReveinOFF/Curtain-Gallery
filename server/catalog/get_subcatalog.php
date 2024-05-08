@@ -1,14 +1,21 @@
 <?php
+// Include db_manager
 require_once("../db/db_manager.php");
+
+// Check for the GET value in the request
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // Create DB connection
     $databaseManager = new DatabaseManager();
 
+    // Run a query to retrieve sub-catalogs
     $result = $databaseManager->sendQuery("SELECT sc.id, sc.name, sc.image, c.name AS catalog_name
                                             FROM subcatalog AS sc
                                             JOIN catalog AS c ON sc.catalog_id = c.id");
 
+    // Remove DB connection
     unset($databaseManager);
 
+    // Return result
     if ($result) {
         if ($result->num_rows > 0) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);

@@ -174,6 +174,7 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Get and Render all sub-catalogs -->
     <script>
       fetch("./server/catalog/get_subcatalog.php", {
         method: "GET",
@@ -183,6 +184,7 @@
       })
         .then((response) => response.json())
         .then((res) => {
+          // Group all sub-catalogs by catalogs
           const groupedData = res.reduce((acc, curr) => {
             const key = curr.catalog_name;
             if (!acc[key]) {
@@ -194,6 +196,7 @@
 
           let catalogs = document.getElementById("catalog-list");
 
+          // START Render all sub-catalogs
           Object.entries(groupedData).forEach(([catalogName, items]) => {
             let catalogDiv = document.createElement("div");
             catalogDiv.classList.add("catalog");
@@ -225,10 +228,12 @@
 
             catalogs.appendChild(catalogDiv);
           });
+          // END Render all sub-catalogs
         })
         .catch((error) => console.error("Помилка загрузки каталога:", error));
     </script>
 
+    <!-- Includes script -->
     <script src="./js/cart.js"></script>
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>

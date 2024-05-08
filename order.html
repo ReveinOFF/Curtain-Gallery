@@ -314,13 +314,17 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Includes script -->
     <script src="./js/cart.js"></script>
 
+    <!-- Get and Render all product from cart -->
     <script>
+      // Get all product from cart
       const data = getCartData();
 
       let order_block = document.getElementsByClassName("cart")[0];
 
+      // Render all product
       data.forEach((element) => {
         let item_div = document.createElement("div");
 
@@ -352,6 +356,7 @@
         order_block.appendChild(item_div);
       });
 
+      // Price Calculation and Render
       const totalPrice = data
         .reduce((sum, item) => sum + parseFloat(item.price), 0)
         .toFixed(2);
@@ -362,7 +367,9 @@
       document.getElementById("price-total").textContent = `${totalPrice} грн`;
     </script>
 
+    <!-- ReRender data if input is changed -->
     <script>
+      // Change selected checkbox
       function changeCheck(e) {
         document
           .getElementsByClassName("checked")[0]
@@ -392,9 +399,12 @@
         }
       }
 
+      // Price Calculation and ReRender
       function priceCalc(num) {
+        // Get updated data from cart
         const data = getCartData();
 
+        // Price Calculation and Render
         const totalPrice = data
           .reduce((sum, item) => sum + parseFloat(item.price), 0)
           .toFixed(2);
@@ -402,8 +412,8 @@
           totalPrice * num
         ).toFixed(2)} грн`;
 
+        // Render new procent
         let procent = document.getElementById("procent");
-
         switch (num) {
           case 1:
             procent.textContent = "100% передплата";
@@ -415,12 +425,10 @@
             procent.textContent = "30% передплата";
             break;
         }
-        // document.getElementById(
-        //   "price-total"
-        // ).textContent = `${totalPrice} грн`;
       }
     </script>
 
+    <!-- Includes script -->
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>

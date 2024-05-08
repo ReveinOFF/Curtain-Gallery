@@ -1,6 +1,7 @@
 <?php
 class DatabaseManager
 {
+    // DB connection data
     private $servername = "localhost";
     private $username = "root";
     private $password = "root";
@@ -8,6 +9,7 @@ class DatabaseManager
     private $port = 3306;
     private $conn;
 
+    // Create connection
     public function __construct()
     {
         $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->port);
@@ -17,11 +19,13 @@ class DatabaseManager
         }
     }
 
+    // Remove connection
     public function __destruct()
     {
         $this->conn->close();
     }
 
+    // Send Query
     public function sendQuery($query)
     {
         return $this->conn->query($query);

@@ -1,3 +1,4 @@
+//Add item to cart
 updateCartData = (newData) => {
   const existingData = getCartData();
   const updatedData = [...existingData, newData];
@@ -7,6 +8,7 @@ updateCartData = (newData) => {
   if (!cart_ex.classList.contains("exist")) cart_ex.classList.add("exist");
 };
 
+//Remove item to cart
 removeCartItem = (itemId) => {
   const existingData = getCartData();
   const updatedData = existingData.filter((item) => item.id !== itemId);
@@ -18,14 +20,17 @@ removeCartItem = (itemId) => {
   }
 };
 
+//Checking for availability in the cart
 isCartEmpty = () => {
   const cartData = getCartData();
   return cartData.length === 0;
 };
 
+//Get all items from cart
 getCartData = () => {
   const cartData = localStorage.getItem("cart");
   return cartData ? JSON.parse(cartData) : [];
 };
 
+//If cart is not empty then show it in the header
 if (!isCartEmpty()) document.getElementById("cart-btn").classList.add("exist");

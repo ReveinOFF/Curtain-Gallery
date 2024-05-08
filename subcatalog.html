@@ -177,10 +177,13 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Script for content retrieval and rendering -->
     <script>
+      // Get query from url
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
 
+      // Get all products by id from sub-catalog
       fetch(`./server/subcatalog/get_products.php?id=${id}`, {
         method: "GET",
         headers: {
@@ -191,6 +194,7 @@
         .then((res) => {
           let pages = document.getElementsByClassName("pages")[0];
 
+          // Render the path to the sub-catalog
           let page1 = document.createElement("a");
           page1.href = "/catalog";
           page1.textContent = res.rows_i.catalog_name;
@@ -213,6 +217,7 @@
           let products_block =
             document.getElementsByClassName("products_block")[0];
 
+          // Render all products
           res.rows.forEach((element) => {
             let link = document.createElement("a");
             link.href = `/product?id=${element.id}`;
@@ -244,6 +249,7 @@
         );
     </script>
 
+    <!-- Includes script -->
     <script src="./js/cart.js"></script>
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>

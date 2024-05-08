@@ -383,13 +383,17 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Includes script -->
     <script src="./js/header.js"></script>
 
+    <!-- Mail Sender Script -->
     <script>
+      // Is valid data
       let validName = false;
       let validEmail = false;
       let validMess = false;
 
+      // START Show/Hidde contact modal
       function eventBlockClose(e) {
         if (!e.target.closest("#contact-modal-child")) contactClose();
       }
@@ -408,7 +412,9 @@
 
         document.removeEventListener("click", eventBlockClose);
       }
+      // END Show/Hidde contact modal
 
+      // Check the validity of the Name
       function onChangeName(event) {
         if (event.target.value === "") {
           document.getElementById("name-check").classList.add("error");
@@ -423,6 +429,7 @@
           document.getElementById("name-check").classList.add("error");
       }
 
+      // Check the validity of the Email
       function onChangeEmail(event) {
         const emailPattern =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -443,6 +450,7 @@
           document.getElementById("email-check").classList.add("error");
       }
 
+      // Check the validity of the Message
       function onChangeMess(event) {
         if (event.target.value === "") {
           document.getElementById("mess-check").classList.add("error");
@@ -457,6 +465,7 @@
           document.getElementById("mess-check").classList.add("error");
       }
 
+      // Send mail
       function contactSubmit(event) {
         event.preventDefault();
 
@@ -490,12 +499,14 @@
       }
     </script>
 
+    <!-- Images Slider -->
     <script>
       let countImage = 1;
       let index = 1;
       const screenWidth = window.innerWidth;
       let listImage = [];
 
+      // Get Count Max Images For One Page
       function calculateImagesToShow() {
         if (screenWidth > 1000) {
           return 6;
@@ -506,6 +517,7 @@
         }
       }
 
+      // Get all name images
       fetch("./server/slider/slider.php", {
         method: "GET",
         headers: {
@@ -549,6 +561,7 @@
         })
         .catch((error) => console.error("Ошибка загрузки изображений:", error));
 
+      // Change Slider Page
       function changeSlide(direction) {
         const imageGallery = document.getElementById("imagesGallery");
         const count = calculateImagesToShow();
@@ -592,15 +605,18 @@
         }
       }
 
+      // Prev Slider Page
       function prevSlide() {
         changeSlide("prev");
       }
 
+      // Next Slider Page
       function nextSlide() {
         changeSlide("next");
       }
     </script>
 
+    <!-- Testimonials Slider -->
     <script>
       if (window.innerWidth <= 760) {
         let slideB = document.getElementById("slide-b");
@@ -610,6 +626,7 @@
         let sliderWidth = slideB.scrollWidth;
         let sliderOffset = slideB.offsetWidth;
 
+        // Event Touched Slider
         function changeTouchedB(isTouch) {
           isTouchSlideB = isTouch;
           if (!isTouch) {
@@ -623,6 +640,7 @@
           }
         }
 
+        // Event Move Mouse
         function slideMoveB(e) {
           if (isTouchSlideB) {
             const currentX = e.clientX || e.touches[0].clientX;
@@ -637,6 +655,7 @@
           }
         }
 
+        // Slider Events
         slideB.addEventListener("mousedown", (e) => {
           changeTouchedB(true);
           startSlideX = e.clientX;
@@ -660,6 +679,7 @@
       }
     </script>
 
+    <!-- Includes script -->
     <script src="./js/cart.js"></script>
     <script src="./js/global.js"></script>
   </body>

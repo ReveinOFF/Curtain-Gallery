@@ -309,12 +309,16 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Include script -->
     <script src="./js/cart.js"></script>
 
+    <!-- Get and render product data -->
     <script>
+      // Get query from url
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
 
+      // Get product by id
       fetch(`./server/product/get_product.php?id=${id}`, {
         method: "GET",
         headers: {
@@ -325,10 +329,12 @@
         .then((res) => {
           let pages = document.getElementsByClassName("pages")[0];
 
+          // If product is not exist
           if (parseInt(res.rows.is_exist) == 0) {
             document.getElementById("cart-btn").disabled = true;
           }
 
+          // START Render product data (phase #1)
           let page1 = document.createElement("a");
           page1.href = "/catalog";
           page1.textContent = res.rows_i.catalog_name;
@@ -375,8 +381,10 @@
             svg.height = 32;
             block.appendChild(svg);
             colors.appendChild(block);
+            // END Render product data (phase #1)
           });
 
+          // START Render product data (phase #2)
           document.getElementById("title").textContent = res.rows.name;
 
           let imgM1 = document.getElementById("image");
@@ -405,19 +413,24 @@
           document.getElementById("protection").textContent =
             res.rows.protection;
           document.getElementById("care").textContent = res.rows.care;
+          // END Render product data (phase #2)
         })
         .catch((error) => console.error("Помилка загрузки продукта:", error));
     </script>
 
     <script>
+      // Redirection to cart page
       function goCart() {
         window.location.href = "/cart";
       }
 
+      // Add product to cart
       function addCart() {
+        // Get query from url
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
 
+        // Add data to cart
         updateCartData({
           id: id,
           name: document.getElementById("title").textContent,
@@ -433,9 +446,11 @@
           value: document.getElementById("value-inp").value,
         });
 
+        // Close modal
         closeModal();
       }
 
+      // Show/Hidde product information (Mobile)
       function showInfo(id) {
         let info = document.getElementById(id);
 
@@ -443,6 +458,7 @@
         else info.classList.add("active");
       }
 
+      // START Show/Hidde cart modal
       function eventCloseCare(e) {
         if (!e.target.closest(".cart_block")) closeModal();
       }
@@ -452,7 +468,6 @@
 
         document.removeEventListener("click", eventCloseCare);
       }
-
       function showModal() {
         let modalTitle = document.getElementById("modal-title");
         if (modalTitle.childNodes.length > 2) {
@@ -463,6 +478,7 @@
           modalColor.removeChild(modalColor.lastChild);
         }
 
+        // Set data to modal from product
         document.getElementById(
           "modal-img"
         ).src = `./assets/images/products/${document
@@ -492,8 +508,10 @@
           document.addEventListener("click", eventCloseCare);
         }, 500);
       }
+      // END Show/Hidde cart modal
     </script>
 
+    <!-- Includes script -->
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>

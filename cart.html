@@ -191,13 +191,17 @@
     </a>
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
+    <!-- Includes script -->
     <script src="./js/cart.js"></script>
 
+    <!-- Get and Render all products from cart -->
     <script>
+      // Redirect to order page
       function goOrder() {
         window.location.href = "/order";
       }
 
+      // Price Calculation and Render
       function priceTotal(data) {
         const totalPrice = data
           .reduce((sum, item) => sum + parseFloat(item.price), 0)
@@ -205,8 +209,10 @@
         document.getElementById("totalPrice").textContent = `${totalPrice} грн`;
       }
 
+      // Get all product from cart
       let data = getCartData();
 
+      // START Render all product from cart
       let cart_block = document.getElementById("cart_block");
       data.forEach((element) => {
         let cart_item = document.createElement("div");
@@ -244,6 +250,7 @@
         input.className = "input-ds";
         input.id = `input-${element.id}`;
         input.value = data.find((item) => item.id === element.id).value;
+        // START Change count for input
         input.oninput = function (event) {
           setTimeout(() => {
             const existingData = getCartData();
@@ -267,6 +274,7 @@
             pb.children[2].textContent = `${price} грн`;
           }, 1000);
         };
+        // END Change count for input
         div2.appendChild(input);
         let span = document.createElement("span");
         span.textContent = "пог.м";
@@ -283,6 +291,7 @@
         close.alt = "remove";
         close.width = 21;
         close.height = 21;
+        // START Remove product from cart
         close.onclick = function () {
           removeCartItem(element.id);
           let remove = document.getElementById(element.id);
@@ -290,14 +299,17 @@
           data = getCartData();
           priceTotal(data);
         };
+        // END Remove product from cart
         cart_item.appendChild(close);
 
         cart_block.appendChild(cart_item);
 
         priceTotal(data);
       });
+      // END Render all product from cart
     </script>
 
+    <!-- Includes script -->
     <script src="./js/header.js"></script>
     <script src="./js/global.js"></script>
   </body>

@@ -1,3 +1,4 @@
+// START Show/hidde burger (Mobile)
 function eventBurgerClose(e) {
   if (!e.target.closest(".mob_burg")) closeBurger();
 }
@@ -11,7 +12,9 @@ function closeBurger() {
 
   document.removeEventListener("click", eventBurgerClose);
 }
+// END Show/hidde burger (Mobile)
 
+// Enable/Disable page scrolling
 function disScroll() {
   document.body.style.overflow = "hidden";
 }
@@ -19,6 +22,7 @@ function allScroll() {
   document.body.style.overflow = "unset";
 }
 
+// START Show/hidde catalog (PC)
 function eventCatalogClose(e) {
   if (!e.target.closest(".burger_th")) closeCatalog();
 }
@@ -47,7 +51,9 @@ function showCatalog(num) {
     );
   }
 }
+// END Show/hidde catalog (PC)
 
+// Show/hidde catalog from burger (Mobile)
 function showMobCatalog(num) {
   let nav = document.getElementsByClassName("hm_nav")[num - 1];
   if (nav.classList.contains("active")) nav.classList.remove("active");

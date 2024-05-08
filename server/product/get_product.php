@@ -1,15 +1,22 @@
 <?php
+// Include db_manager
 require_once("../db/db_manager.php");
+
+// Check for the GET value in the request
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // Get id from GET data
     $product = $_GET['id'];
 
+    // Create DB connection
     $databaseManager = new DatabaseManager();
 
+    // Run a query to retrieve product
     $result = $databaseManager->sendQuery("SELECT p.*
                                             FROM products AS p
                                             WHERE p.id = $product
                                             LIMIT 1");
 
+    // Run a query to get the path to the pages
     $result_i = $databaseManager->sendQuery("SELECT sc.name AS subcatalog_name, c.name AS catalog_name, sc.id AS sc_id
                                             FROM products AS p
                                             JOIN subcatalog AS sc ON p.subcatalog_id = sc.id
@@ -17,8 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                             WHERE p.id = $product
                                             LIMIT 1");
 
+    // Remove DB connection
     unset($databaseManager);
 
+    // Return result
     if ($result && $result_i) {
         if ($result->num_rows > 0 && $result_i->num_rows > 0) {
             $rows = $result->fetch_all(MYSQLI_ASSOC)[0];
