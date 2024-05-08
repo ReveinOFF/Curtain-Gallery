@@ -23,7 +23,7 @@
   </head>
   <body>
     <div class="bg-top"></div>
-    <header class="container-s justify_between">
+    <header class="container">
       <a href="/">
         <img
           src="./assets/images/logo.svg"
@@ -35,7 +35,7 @@
       <nav class="h_nav align_center">
         <a href="/">Головна</a>
         <div class="h_select">
-          <div class="align_center" onclick="showCatalog(1)">
+          <div class="align_center">
             <span>Штори</span>
             <img
               src="./assets/images/header/arrow.svg"
@@ -49,7 +49,7 @@
           <div id="catalog_s1" class="burger_th"></div>
         </div>
         <div class="h_select">
-          <div class="align_center" onclick="showCatalog(2)">
+          <div class="align_center">
             <span>Тюль</span>
             <img
               src="./assets/images/header/arrow.svg"
@@ -63,7 +63,7 @@
           <div id="catalog_s2" class="burger_th"></div>
         </div>
         <div class="h_select">
-          <div class="align_center" onclick="showCatalog(3)">
+          <div class="align_center">
             <span>Тасьма</span>
             <img
               src="./assets/images/header/arrow.svg"
@@ -300,7 +300,7 @@
                 <div id="price-procent">00.00 грн</div>
               </div>
               <div>
-                <div>Вього:</div>
+                <div>До сплати:</div>
                 <div id="price-total">00.00 грн</div>
               </div>
               <button class="button-bg">Оплатити</button>
@@ -409,6 +409,9 @@
           .reduce((sum, item) => sum + parseFloat(item.price), 0)
           .toFixed(2);
         document.getElementById("price-procent").textContent = `${(
+          totalPrice * num
+        ).toFixed(2)} грн`;
+        document.getElementById("price-total").textContent = `${(
           totalPrice * num
         ).toFixed(2)} грн`;
 

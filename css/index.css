@@ -314,6 +314,10 @@
   margin-top: 44px;
 }
 
+.lv4 {
+  overflow-x: hidden;
+}
+
 @media screen and (max-width: 1440px) {
   .lv1 > img {
     width: 410px;

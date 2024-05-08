@@ -58,6 +58,8 @@ button {
 
 header {
   margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .h_nav {
@@ -79,13 +81,15 @@ header {
 .h_select > div:first-of-type {
   gap: 4px;
   cursor: pointer;
+  position: relative;
+  z-index: 6;
 }
 
 .h_select > div:first-of-type > img {
   transition: 0.3s;
 }
 
-.h_select > div:first-of-type > img:is(.active) {
+.h_select:hover > div:first-of-type > img {
   transform: rotate(90deg);
 }
 
@@ -401,7 +405,7 @@ textarea {
   background: #565046;
   border-radius: 10px;
   position: absolute;
-  z-index: 9;
+  z-index: 5;
   top: -20px;
   right: 50%;
   transform: translateX(50%);
@@ -414,7 +418,7 @@ textarea {
   transition: all 0.3s;
 }
 
-.burger_th:is(.active) {
+.h_select:hover > .burger_th {
   opacity: 1;
   top: 100%;
   visibility: visible;
@@ -511,6 +515,10 @@ textarea {
     margin-inline: 64px;
   }
 
+  header {
+    overflow: hidden;
+  }
+
   header > a > img {
     width: unset;
     height: unset;
@@ -530,6 +538,10 @@ textarea {
   .container,
   .container-s {
     margin-inline: 36px;
+  }
+
+  .lv1 h1 {
+    font-size: 30px;
   }
 
   header > a > img {

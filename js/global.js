@@ -22,37 +22,6 @@ function allScroll() {
   document.body.style.overflow = "unset";
 }
 
-// START Show/hidde catalog (PC)
-function eventCatalogClose(e) {
-  if (!e.target.closest(".burger_th")) closeCatalog();
-}
-function closeCatalog() {
-  let block = document.querySelectorAll(".burger_th.active")[0];
-  block.classList.remove("active");
-
-  let arrow = document.querySelectorAll(".arrow_ss.active")[0];
-  arrow.classList.remove("active");
-
-  document.removeEventListener("click", eventCatalogClose);
-}
-function showCatalog(num) {
-  let block = document.getElementById(`catalog_s${num}`);
-  let arrow = document.getElementById(`arrow_s${num}`);
-
-  if (block.classList.contains("active")) {
-    closeCatalog();
-  } else {
-    block.classList.add("active");
-    arrow.classList.add("active");
-
-    setTimeout(
-      () => document.addEventListener("click", eventCatalogClose),
-      500
-    );
-  }
-}
-// END Show/hidde catalog (PC)
-
 // Show/hidde catalog from burger (Mobile)
 function showMobCatalog(num) {
   let nav = document.getElementsByClassName("hm_nav")[num - 1];

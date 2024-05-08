@@ -259,6 +259,7 @@
   margin-top: 47px;
   padding-inline: 0;
   justify-self: center;
+  max-height: 70px;
 }
 
 .cart_info {
