@@ -22,7 +22,7 @@
     />
   </head>
   <body>
-    <div class="bg-top"></div>
+    <!-- Header -->
     <header class="container">
       <a href="/">
         <img
@@ -32,6 +32,7 @@
           height="30"
         />
       </a>
+      <!-- Navigation PC -->
       <nav class="h_nav align_center">
         <a href="/">Головна</a>
         <div class="h_select">
@@ -86,6 +87,7 @@
           />
         </a>
       </nav>
+      <!-- Burger Mobile -->
       <div class="h_burger">
         <img
           src="./assets/images/header/burger.svg"
@@ -190,7 +192,9 @@
         <button class="button-bg" onclick="goCart()">До кошика</button>
       </div>
     </div>
+    <!-- Main -->
     <main>
+      <!-- Pages -->
       <div class="pages container-s">
         <a href="/catalog">Каталог</a>
         <img
@@ -200,8 +204,11 @@
           height="12"
         />
       </div>
+      <!-- Product Block -->
       <div class="container-s product">
+        <!-- Product Info Top -->
         <div class="product-top">
+          <!-- Product Info Left (Images) -->
           <div class="product-tl">
             <img id="image" src="" alt="image-main" />
             <div>
@@ -214,6 +221,7 @@
               вашого монітора і може відрізнятися від реального.
             </div>
           </div>
+          <!-- Product Info Right (Name, Price and Color) -->
           <div class="product-tr">
             <h1 id="title">...</h1>
             <p id="price">1550.00 грн / пог.м</p>
@@ -230,7 +238,9 @@
             </button>
           </div>
         </div>
+        <!-- Product Info Bottom -->
         <div class="product-bot">
+          <!-- Features Info -->
           <div class="product-bf" id="first">
             <h2 onclick="showInfo('first')">Характеристики</h2>
             <div>
@@ -260,6 +270,7 @@
               </div>
             </div>
           </div>
+          <!-- Order Info -->
           <div class="product-bs" id="second">
             <h2 onclick="showInfo('second')">Інформація про замовлення</h2>
             <div>
@@ -268,6 +279,7 @@
               тасьми. Ви можете переглянути їх тут.
             </div>
           </div>
+          <!-- Buy and Delivery Info -->
           <div class="product-bl" id="last">
             <h2 onclick="showInfo('last')">Доставка і оплата</h2>
             <div>
@@ -304,9 +316,11 @@
         </div>
       </div>
     </main>
+    <!-- Contact Query -->
     <a href="/#contact" class="req-br" style="z-index: 5">
       <img src="./assets/images/req.svg" alt="req-br" width="13" height="24" />
     </a>
+    <!-- Footer -->
     <footer>Copyright © 2024 “Галерея штор”. Усі права захищені.</footer>
 
     <!-- Include script -->
